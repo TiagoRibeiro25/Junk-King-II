@@ -13,7 +13,7 @@ scene.init();
 scene.addLight();
 scene.addFloor();
 scene.render();
-scene.enableCameraControls();
+// scene.enableCameraControls();
 
 // Load player
 const player = new Player();
@@ -26,7 +26,7 @@ function render() {
 
   scene.rotateSun(5000); // speed of rotation
   player.update();
-  // updateCamera();
+  updateCamera();
 
   requestAnimationFrame(render);
 }

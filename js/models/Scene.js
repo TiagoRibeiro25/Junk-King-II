@@ -1,6 +1,5 @@
 import { OrbitControls } from "../../libs/OrbitControls.js";
 import * as THREE from "../../libs/three.module.js";
-import { shapes } from "../shapes.js";
 
 export class Scene {
   constructor() {
@@ -51,7 +50,7 @@ export class Scene {
 
   addFloor() {
     this.floor = new THREE.Mesh(
-      shapes.plane,
+      new THREE.PlaneGeometry(40, 200),
       new THREE.MeshStandardMaterial({ color: 0x444 })
     );
     this.floor.rotation.x = -Math.PI / 2;
