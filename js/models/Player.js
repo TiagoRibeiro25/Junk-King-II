@@ -15,7 +15,7 @@ const upperKneeThreshold = Math.PI * 2;
 const lowerCrownThreshold = -0.2;
 const upperCrownThreshold = 0.1;
 
-let speed = 0.03;
+let speed = 0.02;
 let direction = 1;
 let crownSpeed = 0.01;
 let crownDirection = 1;
@@ -31,6 +31,9 @@ let isUpArrowPressed = false;
 let isDownArrowPressed = false;
 let isLeftArrowPressed = false;
 let isRightArrowPressed = false;
+
+let geometry = new THREE.BoxGeometry(1.5, 0.5, 0.5);
+let material = new THREE.MeshNormalMaterial();
 
 function addShadow(...params) {
   params.forEach((param) => {
@@ -65,7 +68,7 @@ export class Player {
   }
 
   createBody(scene) {
-    this.body.position.set(0, 0, 90);
+    this.body.position.set(0, -0.5, 90);
 
     scene.add(this.body);
 
@@ -91,7 +94,7 @@ export class Player {
         new THREE.SphereGeometry(0.1, 10, 10),
         new THREE.MeshBasicMaterial({ color: 0xffffff })
       );
-      eye.position.set(0.3, 0.2, eyesZ[i]);
+      eye.position.set(0.7, 0.2, eyesZ[i]);
       this.head.add(eye);
     }
 
@@ -134,106 +137,79 @@ export class Player {
   }
 
   createShoulders() {
-    // ? Right
-    // shoulder
+    //create the right arm
     this.pivotShoulderRight.position.set(-0.25, 0.75, 2);
     this.pivotShoulderRight.rotation.set(0, 0, -Math.PI / 2);
     this.body.add(this.pivotShoulderRight);
 
-    // elbow
+    const cube = new THREE.Mesh(geometry, material);
+    cube.position.set(0.75, 0.25, -0.25);
+    this.pivotShoulderRight.add(cube);
+
     this.pivotElbowRight.position.set(0.75, 0, 0);
     this.pivotElbowRight.rotation.set(0, 0, Math.PI * 2);
+    cube.add(this.pivotElbowRight);
 
-    // ? Left
-    // shoulder
+    const cube2 = new THREE.Mesh(geometry, material);
+    cube2.position.set(0.75, 0, 0);
+    this.pivotElbowRight.add(cube2);
+
+    //create the left arm
     this.pivotShoulderLeft.position.set(-0.25, 0.75, -1.5);
     this.pivotShoulderLeft.rotation.set(0, 0, -Math.PI / 2);
     this.body.add(this.pivotShoulderLeft);
 
-    // elbow
+    const cube3 = new THREE.Mesh(geometry, material);
+    cube3.position.set(0.75, 0.25, -0.25);
+    this.pivotShoulderLeft.add(cube3);
+
     this.pivotElbowLeft.position.set(0.75, 0, 0);
     this.pivotElbowLeft.rotation.set(0, 0, Math.PI * 2);
+    cube3.add(this.pivotElbowLeft);
 
-    const rightPositions = [
-      { x: 0.75, y: 0.25, z: -0.25 },
-      { x: 0.75, y: 0, z: 0 },
-    ];
+    const cube4 = new THREE.Mesh(geometry, material);
+    cube4.position.set(0.75, 0, 0);
+    this.pivotElbowLeft.add(cube4);
 
-    const leftPositions = [
-      { x: 0.75, y: 0.25, z: -0.25 },
-      { x: 0.75, y: 0, z: 0 },
-    ];
-
-    for (let i = 0; i < 4; i++) {
-      const cube = new THREE.Mesh(
-        new THREE.BoxGeometry(1.5, 0.5, 0.5),
-        new THREE.MeshNormalMaterial()
-      );
-      if (i < 2) {
-        cube.position.set(rightPositions[i].x, rightPositions[i].y, rightPositions[i].z);
-        this.pivotShoulderRight.add(cube);
-        if (i === 0) cube.add(this.pivotElbowRight);
-      } else {
-        cube.position.set(
-          leftPositions[i - 2].x,
-          leftPositions[i - 2].y,
-          leftPositions[i - 2].z
-        );
-        this.pivotShoulderLeft.add(cube);
-        if (i - 2 === 0) cube.add(this.pivotElbowLeft);
-      }
-    }
-
-    addShadow(
-      this.pivotShoulderRight,
-      this.pivotShoulderLeft,
-      ...this.pivotShoulderRight.children.filter((child) => child.type === "Mesh"),
-      ...this.pivotShoulderLeft.children.filter((child) => child.type === "Mesh")
-    );
+    addShadow(cube, cube2, cube3, cube4);
   }
 
   createLegs() {
-    // ? Right
-    // leg
+    // ? Right Leg
     this.pivotLegRight.position.set(0, -2, 0.75);
-    this.pivotLegRight.rotation.set(0, 0, Math.PI / 2);
-    // knee
+    this.pivotLegRight.rotation.set(0, 0, -Math.PI / 2);
+    this.body.add(this.pivotLegRight);
+
+    const cube5 = new THREE.Mesh(geometry, material);
+    cube5.position.set(0.75, 0, 0);
+    this.pivotLegRight.add(cube5);
+
     this.pivotKneeRight.position.set(0.75, 0, 0);
     this.pivotKneeRight.rotation.set(0, 0, Math.PI * 2);
+    cube5.add(this.pivotKneeRight);
 
-    // ? Left
-    // leg
+    const cube6 = new THREE.Mesh(geometry, material);
+    cube6.position.set(0.75, 0, 0);
+    this.pivotKneeRight.add(cube6);
+
+    // ? Left Leg
     this.pivotLegLeft.position.set(0, -2, -0.75);
     this.pivotLegLeft.rotation.set(0, 0, -Math.PI / 2);
-    // knee
-    this.pivotKneeLeft.position.set(0.75, 0, 0);
-    this.pivotKneeLeft.rotation.set(0, 0, -Math.PI * 2);
-
-    this.body.add(this.pivotLegRight);
     this.body.add(this.pivotLegLeft);
 
-    for (let i = 0; i < 4; i++) {
-      const cube = new THREE.Mesh(
-        new THREE.BoxGeometry(1.5, 0.5, 0.5),
-        new THREE.MeshNormalMaterial()
-      );
-      cube.position.set(0.75, 0, 0);
+    const cube7 = new THREE.Mesh(geometry, material);
+    cube7.position.set(0.75, 0, 0);
+    this.pivotLegLeft.add(cube7);
 
-      if (i < 2) {
-        this.pivotLegRight.add(cube);
-        if (i === 0) cube.add(this.pivotKneeRight);
-      } else {
-        this.pivotLegLeft.add(cube);
-        if (i - 2 === 0) cube.add(this.pivotKneeLeft);
-      }
-    }
+    this.pivotKneeLeft.position.set(0.75, 0, 0);
+    this.pivotKneeLeft.rotation.set(0, 0, -Math.PI * 2);
+    cube7.add(this.pivotKneeLeft);
 
-    addShadow(
-      this.pivotLegRight,
-      this.pivotLegLeft,
-      ...this.pivotLegRight.children.filter((child) => child.type === "Mesh"),
-      ...this.pivotLegLeft.children.filter((child) => child.type === "Mesh")
-    );
+    const cube8 = new THREE.Mesh(geometry, material);
+    cube8.position.set(0.75, 0, 0);
+    this.pivotKneeLeft.add(cube8);
+
+    addShadow(cube5, cube6, cube7, cube8);
   }
 
   enableKeyboard(document) {
