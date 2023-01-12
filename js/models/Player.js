@@ -211,17 +211,17 @@ export class Player {
 
   enableKeyboard(document) {
     document.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowUp") isUpArrowPressed = true;
-      if (e.key === "ArrowDown") isDownArrowPressed = true;
-      if (e.key === "ArrowLeft") isLeftArrowPressed = true;
-      if (e.key === "ArrowRight") isRightArrowPressed = true;
+      if (e.key === "ArrowUp" || e.key === "w") isUpArrowPressed = true;
+      if (e.key === "ArrowDown" || e.key === "s") isDownArrowPressed = true;
+      if (e.key === "ArrowLeft" || e.key === "a") isLeftArrowPressed = true;
+      if (e.key === "ArrowRight" || e.key === "d") isRightArrowPressed = true;
     });
 
     document.addEventListener("keyup", (e) => {
-      if (e.key === "ArrowUp") isUpArrowPressed = false;
-      if (e.key === "ArrowDown") isDownArrowPressed = false;
-      if (e.key === "ArrowLeft") isLeftArrowPressed = false;
-      if (e.key === "ArrowRight") isRightArrowPressed = false;
+      if (e.key === "ArrowUp" || e.key === "w") isUpArrowPressed = false;
+      if (e.key === "ArrowDown" || e.key === "s") isDownArrowPressed = false;
+      if (e.key === "ArrowLeft" || e.key === "a") isLeftArrowPressed = false;
+      if (e.key === "ArrowRight" || e.key === "d") isRightArrowPressed = false;
     });
   }
 
