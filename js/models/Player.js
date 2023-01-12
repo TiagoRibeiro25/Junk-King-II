@@ -28,10 +28,10 @@ let kneeSpeed = 0.02;
 let kneeDirection = 1;
 let movementSpeed = 0.07;
 
+let isRightArrowPressed = false;
+let isLeftArrowPressed = false;
 let isUpArrowPressed = false;
 let isDownArrowPressed = false;
-let isLeftArrowPressed = false;
-let isRightArrowPressed = false;
 
 let geometry = new THREE.BoxGeometry(1.5, 0.5, 0.5);
 let material = new THREE.MeshNormalMaterial();
@@ -208,23 +208,23 @@ export class Player {
 
   enableKeyboard(document) {
     document.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowUp") isLeftArrowPressed = true;
+      if (e.key === "ArrowUp") isUpArrowPressed = true;
 
-      if (e.key === "ArrowDown") isRightArrowPressed = true;
+      if (e.key === "ArrowDown") isDownArrowPressed = true;
 
-      if (e.key === "ArrowLeft") isDownArrowPressed = true;
+      if (e.key === "ArrowLeft") isLeftArrowPressed = true;
 
-      if (e.key === "ArrowRight") isUpArrowPressed = true;
+      if (e.key === "ArrowRight") isRightArrowPressed = true;
     });
 
     document.addEventListener("keyup", (e) => {
-      if (e.key === "ArrowUp") isLeftArrowPressed = false;
+      if (e.key === "ArrowUp") isUpArrowPressed = false;
 
-      if (e.key === "ArrowDown") isRightArrowPressed = false;
+      if (e.key === "ArrowDown") isDownArrowPressed = false;
 
-      if (e.key === "ArrowLeft") isDownArrowPressed = false;
+      if (e.key === "ArrowLeft") isLeftArrowPressed = false;
 
-      if (e.key === "ArrowRight") isUpArrowPressed = false;
+      if (e.key === "ArrowRight") isRightArrowPressed = false;
     });
   }
 
@@ -312,33 +312,30 @@ export class Player {
 
   update() {
     if (
-      !isUpArrowPressed &&
-      !isDownArrowPressed &&
+      !isRightArrowPressed &&
       !isLeftArrowPressed &&
-      !isRightArrowPressed
+      !isUpArrowPressed &&
+      !isDownArrowPressed
     ) {
       this.stopRunning();
-    } else {
-      if (isUpArrowPressed) {
-        this.body.position.x += movementSpeed;
-        this.body.rotation.y = 0;
-        this.run();
-      }
-      if (isDownArrowPressed) {
-        this.body.position.x -= movementSpeed;
-        this.body.rotation.y = Math.PI;
-        this.run();
-      }
-      if (isLeftArrowPressed) {
-        this.body.position.z -= movementSpeed;
-        this.body.rotation.y = Math.PI / 2;
-        this.run();
-      }
-      if (isRightArrowPressed) {
-        this.body.position.z += movementSpeed;
-        this.body.rotation.y = -Math.PI / 2;
-        this.run();
-      }
+      return;
     }
+    if (isRightArrowPressed) {
+      this.body.position.x += this.body.position.x < 6 ? movementSpeed : 0;
+      this.body.rotation.y = 0;
+    }
+    if (isLeftArrowPressed) {
+      this.body.position.x -= this.body.position.x > -16 ? movementSpeed : 0;
+      this.body.rotation.y = Math.PI;
+    }
+    if (isUpArrowPressed) {
+      this.body.position.z -= this.body.position.z > -54 ? movementSpeed : 0;
+      this.body.rotation.y = Math.PI / 2;
+    }
+    if (isDownArrowPressed) {
+      this.body.position.z += this.body.position.z < 94 ? movementSpeed : 0;
+      this.body.rotation.y = -Math.PI / 2;
+    }
+    this.run();
   }
 }
