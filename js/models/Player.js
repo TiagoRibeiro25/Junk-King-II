@@ -209,21 +209,15 @@ export class Player {
   enableKeyboard(document) {
     document.addEventListener("keydown", (e) => {
       if (e.key === "ArrowUp") isUpArrowPressed = true;
-
       if (e.key === "ArrowDown") isDownArrowPressed = true;
-
       if (e.key === "ArrowLeft") isLeftArrowPressed = true;
-
       if (e.key === "ArrowRight") isRightArrowPressed = true;
     });
 
     document.addEventListener("keyup", (e) => {
       if (e.key === "ArrowUp") isUpArrowPressed = false;
-
       if (e.key === "ArrowDown") isDownArrowPressed = false;
-
       if (e.key === "ArrowLeft") isLeftArrowPressed = false;
-
       if (e.key === "ArrowRight") isRightArrowPressed = false;
     });
   }

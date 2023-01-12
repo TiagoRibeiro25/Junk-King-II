@@ -1,5 +1,6 @@
 import { OrbitControls } from "../../libs/OrbitControls.js";
 import * as THREE from "../../libs/three.module.js";
+import { addShadow } from "../addShadow.js";
 
 export class Scene {
   constructor() {
@@ -18,7 +19,7 @@ export class Scene {
 
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.renderer.setClearColor(0x222);
+    this.renderer.setClearColor(0x00ffff);
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -44,21 +45,56 @@ export class Scene {
     this.sunLight.shadow.camera.right = 150;
     this.sunLight.shadow.camera.top = -100;
     this.sunLight.shadow.camera.bottom = 100;
-    this.sunLight.intensity = 10;
+    this.sunLight.intensity = 2;
     this.scene.add(this.sunLight);
   }
 
   addFloor() {
+    // this.floor = new THREE.Mesh(
+    //   new THREE.PlaneGeometry(25, 150),
+    //   // load texture
+    //   new THREE.MeshStandardMaterial({ color: 0x004d00 })
+    // );
+
+    const texture = new THREE.TextureLoader().load("../../assets/grass.jpg");
+
     this.floor = new THREE.Mesh(
       new THREE.PlaneGeometry(25, 150),
-      new THREE.MeshStandardMaterial({ color: 0x444 })
+      new THREE.MeshStandardMaterial({ map: texture })
     );
+
     this.floor.rotation.x = -Math.PI / 2;
     this.floor.position.x = -5;
     this.floor.position.y = -5;
     this.floor.position.z = 20;
-    this.floor.receiveShadow = true;
     this.scene.add(this.floor);
+
+    addShadow(this.floor);
+  }
+
+  addSkyBox() {
+    const materialArray = [];
+    const texture_ft = new THREE.TextureLoader().load("../../assets/heather_ft.jpg");
+    const texture_bk = new THREE.TextureLoader().load("../../assets/heather_bk.jpg");
+    const texture_up = new THREE.TextureLoader().load("../../assets/heather_up.jpg");
+    const texture_dn = new THREE.TextureLoader().load("../../assets/heather_dn.jpg");
+    const texture_rt = new THREE.TextureLoader().load("../../assets/heather_rt.jpg");
+    const texture_lf = new THREE.TextureLoader().load("../../assets/heather_lf.jpg");
+
+    materialArray.push(new THREE.MeshBasicMaterial({ map: texture_ft }));
+    materialArray.push(new THREE.MeshBasicMaterial({ map: texture_bk }));
+    materialArray.push(new THREE.MeshBasicMaterial({ map: texture_up }));
+    materialArray.push(new THREE.MeshBasicMaterial({ map: texture_dn }));
+    materialArray.push(new THREE.MeshBasicMaterial({ map: texture_rt }));
+    materialArray.push(new THREE.MeshBasicMaterial({ map: texture_lf }));
+
+    for (let i = 0; i < 6; i++) {
+      materialArray[i].side = THREE.BackSide;
+    }
+
+    const skyBoxGeo = new THREE.BoxGeometry(1000, 1000, 1000);
+    const skyBox = new THREE.Mesh(skyBoxGeo, materialArray);
+    this.scene.add(skyBox);
   }
 
   /**

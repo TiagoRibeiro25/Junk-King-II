@@ -1,30 +1,31 @@
 import { GiantHand } from "./models/GiantHand.js";
+import { Grass } from "./models/Grass.js";
 import { Player } from "./models/Player.js";
 import { Scene } from "./models/Scene.js";
+import { updateCamera } from "./updateCamera.js";
 
-function updateCamera() {
-  scene.camera.position.x = player.body.position.x;
-  scene.camera.position.z = player.body.position.z + 10;
-  scene.camera.position.y = player.body.position.y + 2.5;
-}
-
-// Load scene
+// ? Load scene
 const scene = new Scene();
 scene.init();
 scene.addLight();
 scene.addFloor();
 scene.render();
+scene.addSkyBox();
 // scene.enableCameraControls();
 
-// Load player
+// ? Load player
 const player = new Player();
 player.init(scene.scene);
 player.enableKeyboard(document);
 scene.camera.lookAt(player.body.position);
 
-// Load Giant Hand
+// ? Load Giant Hand
 const giantHand = new GiantHand();
 giantHand.init(scene.scene);
+
+// ? Load Grass
+const grass = new Grass();
+grass.init(scene.scene);
 
 function render() {
   scene.renderer.render(scene.scene, scene.camera);
@@ -32,7 +33,8 @@ function render() {
   scene.rotateSun(5000); // speed of rotation
   player.update();
   giantHand.animate();
-  updateCamera();
+  grass.animate(scene.renderer, scene.scene, scene.camera);
+  updateCamera(scene, player);
 
   requestAnimationFrame(render);
 }
