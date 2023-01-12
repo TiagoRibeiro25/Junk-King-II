@@ -1,6 +1,9 @@
 import * as THREE from "../../libs/three.module.js";
 import { addShadow } from "../addShadow.js";
 
+const footStepSound = new Audio("./assets/sounds/footsteps.mp3");
+footStepSound.volume = 0.2;
+
 const lowerThreshold = -Math.PI / 1.25;
 const upperThreshold = -Math.PI / 4;
 
@@ -312,6 +315,7 @@ export class Player {
       !isDownArrowPressed
     ) {
       this.stopRunning();
+      footStepSound.pause();
       return;
     }
     if (isRightArrowPressed) {
@@ -330,6 +334,8 @@ export class Player {
       this.body.position.z += this.body.position.z < 94 ? movementSpeed : 0;
       this.body.rotation.y = -Math.PI / 2;
     }
+
+    footStepSound.play();
     this.run();
   }
 }
