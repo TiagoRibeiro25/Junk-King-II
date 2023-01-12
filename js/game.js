@@ -41,6 +41,8 @@ function render() {
   grass.animate(scene.renderer, scene.scene, scene.camera);
   updateCamera(scene, player);
 
+  if (audio.paused) audio.play();
+
   requestAnimationFrame(render);
 }
 
@@ -50,7 +52,4 @@ window.addEventListener("resize", () => {
   scene.renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-window.onload = () => {
-  audio.play();
-  render();
-};
+window.onload = () => render();
