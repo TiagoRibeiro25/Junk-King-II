@@ -1,9 +1,10 @@
+import { GiantHand } from "./models/GiantHand.js";
 import { Player } from "./models/Player.js";
 import { Scene } from "./models/Scene.js";
 
 function updateCamera() {
   scene.camera.position.x = player.body.position.x;
-  scene.camera.position.z = player.body.position.z + 8;
+  scene.camera.position.z = player.body.position.z + 10;
   scene.camera.position.y = player.body.position.y + 2.5;
 }
 
@@ -21,11 +22,16 @@ player.init(scene.scene);
 player.enableKeyboard(document);
 scene.camera.lookAt(player.body.position);
 
+// Load Giant Hand
+const giantHand = new GiantHand();
+giantHand.init(scene.scene);
+
 function render() {
   scene.renderer.render(scene.scene, scene.camera);
 
   scene.rotateSun(5000); // speed of rotation
   player.update();
+  giantHand.animate();
   updateCamera();
 
   requestAnimationFrame(render);

@@ -50,11 +50,13 @@ export class Scene {
 
   addFloor() {
     this.floor = new THREE.Mesh(
-      new THREE.PlaneGeometry(40, 200),
+      new THREE.PlaneGeometry(25, 150),
       new THREE.MeshStandardMaterial({ color: 0x444 })
     );
     this.floor.rotation.x = -Math.PI / 2;
+    this.floor.position.x = -5;
     this.floor.position.y = -5;
+    this.floor.position.z = 20;
     this.floor.receiveShadow = true;
     this.scene.add(this.floor);
   }

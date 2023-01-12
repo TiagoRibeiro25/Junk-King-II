@@ -1,4 +1,5 @@
 import * as THREE from "../../libs/three.module.js";
+import { addShadow } from "../addShadow.js";
 
 const lowerThreshold = -Math.PI / 1.25;
 const upperThreshold = -Math.PI / 4;
@@ -35,13 +36,6 @@ let isRightArrowPressed = false;
 let geometry = new THREE.BoxGeometry(1.5, 0.5, 0.5);
 let material = new THREE.MeshNormalMaterial();
 
-function addShadow(...params) {
-  params.forEach((param) => {
-    param.castShadow = true;
-    param.receiveShadow = true;
-  });
-}
-
 export class Player {
   constructor() {
     this.body = new THREE.Mesh(
@@ -68,7 +62,7 @@ export class Player {
   }
 
   createBody(scene) {
-    this.body.position.set(0, -0.5, 90);
+    this.body.position.set(0, 0, 90);
 
     scene.add(this.body);
 
@@ -245,7 +239,7 @@ export class Player {
       crownSpeed = 0.01;
     }
 
-    this.pivotShoulderRight.rotation.z += direction * speed;
+    this.pivotShoulderRight.rotation.z -= direction * speed;
     this.pivotShoulderLeft.rotation.z += direction * speed;
 
     if (
