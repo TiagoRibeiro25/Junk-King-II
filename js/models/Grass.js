@@ -1,4 +1,5 @@
 import * as THREE from "../../libs/three.module.js";
+import { addShadow } from "../addShadow.js";
 
 ////////////
 // MATERIAL
@@ -119,6 +120,8 @@ export class Grass {
     // change the position of the grass closer to the player
     instancedMesh.position.z = 20;
     instancedMesh.position.x = -5;
+
+    addShadow(instancedMesh);
   }
 
   animate() {

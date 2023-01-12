@@ -23,6 +23,7 @@ export class Scene {
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
     document.body.appendChild(this.renderer.domElement);
   }
 
@@ -45,7 +46,7 @@ export class Scene {
     this.sunLight.shadow.camera.right = 150;
     this.sunLight.shadow.camera.top = -100;
     this.sunLight.shadow.camera.bottom = 100;
-    this.sunLight.intensity = 2;
+    this.sunLight.intensity = 3;
     this.scene.add(this.sunLight);
   }
 
