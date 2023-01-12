@@ -1,7 +1,6 @@
 import * as THREE from "../../libs/three.module.js";
 import { addShadow } from "../addShadow.js";
 const handSound = new Audio("../../assets/sounds/handV2.mp3");
-handSound.volume = 0.1;
 
 // Geometries
 const armGeometry = new THREE.BoxGeometry(10, 15, 10);
@@ -104,17 +103,19 @@ export class GiantHand {
     });
   }
 
-  animateArm() {
+  animateArm(handVolume) {
     if (this.sphere.rotation.z < 1.55 || this.sphere.rotation.z > 3.17) {
       this.movement = this.movement * -1;
 
       if (this.movement === 0.01) handSound.play();
     }
     this.sphere.rotation.z -= this.movement;
+
+    handSound.volume = handVolume;
   }
 
-  animate() {
-    this.animateArm();
+  animate(handVolume) {
+    this.animateArm(handVolume);
     this.animateFingers();
   }
 }

@@ -4,6 +4,13 @@ import { Player } from "./models/Player.js";
 import { Scene } from "./models/Scene.js";
 import { updateCamera } from "./updateCamera.js";
 
+function getVolume() {
+  let result = 55 - player.body.position.z;
+  if (result < 0) result *= -1;
+  result = 0.04 - result / 5000;
+  return result;
+}
+
 // ? Load scene
 const scene = new Scene();
 scene.init();
@@ -32,7 +39,7 @@ function render() {
 
   scene.rotateSun(5000); // speed of rotation
   player.update();
-  giantHand.animate();
+  giantHand.animate(getVolume());
   grass.animate(scene.renderer, scene.scene, scene.camera);
   updateCamera(scene, player);
 

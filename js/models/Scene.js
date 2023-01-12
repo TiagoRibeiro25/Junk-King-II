@@ -50,12 +50,6 @@ export class Scene {
   }
 
   addFloor() {
-    // this.floor = new THREE.Mesh(
-    //   new THREE.PlaneGeometry(25, 150),
-    //   // load texture
-    //   new THREE.MeshStandardMaterial({ color: 0x004d00 })
-    // );
-
     const texture = new THREE.TextureLoader().load("../../assets/grass.jpg");
 
     this.floor = new THREE.Mesh(
