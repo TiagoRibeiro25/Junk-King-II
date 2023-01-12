@@ -28,4 +28,4 @@ The controls are very simple:
 ## Live Demo
 
 [Live Demo](https://junk-king.netlify.app/) (Junk King I)
-[Live Demo](https://junk-king.netlify.app/) (Junk King II - not available yet)
+[Live Demo](https://junkkingii.live/) (Junk King II - not available yet)
