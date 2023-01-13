@@ -23,6 +23,7 @@ export class Scene {
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    this.renderer.antialias = true;
 
     document.body.appendChild(this.renderer.domElement);
   }
@@ -42,16 +43,19 @@ export class Scene {
     this.sunLight.shadow.mapSize.height = 2048;
     this.sunLight.shadow.camera.near = 0.5;
     this.sunLight.shadow.camera.far = 175;
-    this.sunLight.shadow.camera.left = -150;
-    this.sunLight.shadow.camera.right = 150;
+    this.sunLight.shadow.camera.left = -100;
+    this.sunLight.shadow.camera.right = 100;
     this.sunLight.shadow.camera.top = -100;
     this.sunLight.shadow.camera.bottom = 100;
-    this.sunLight.intensity = 2;
+
     this.scene.add(this.sunLight);
   }
 
   addFloor() {
     const texture = new THREE.TextureLoader().load("../../assets/grass.jpg");
+    texture.wrapS = THREE.MirroredRepeatWrapping;
+    texture.wrapT = THREE.MirroredRepeatWrapping;
+    texture.repeat.set(4, 40);
 
     this.floor = new THREE.Mesh(
       new THREE.PlaneGeometry(25, 150),

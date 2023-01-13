@@ -1,4 +1,5 @@
 import getVolumeByDistance from "./getVolumeByDistance.js";
+import handleHandOnPlayer from "./handleHandOnPlayer.js";
 import { GiantHand } from "./models/GiantHand.js";
 import { Grass } from "./models/Grass.js";
 import { Player } from "./models/Player.js";
@@ -43,6 +44,8 @@ export default function game() {
     updateCamera(scene, player);
 
     if (audio.paused) audio.play();
+
+    handleHandOnPlayer(player, giantHand);
 
     requestAnimationFrame(render);
   }

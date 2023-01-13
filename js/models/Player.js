@@ -40,6 +40,8 @@ let isDownArrowPressed = false;
 let geometry = new THREE.BoxGeometry(1.5, 0.5, 0.5);
 let material = new THREE.MeshNormalMaterial();
 
+let isFalling = false;
+
 export class Player {
   constructor() {
     this.body = new THREE.Mesh(
@@ -224,10 +226,22 @@ export class Player {
 
   enableKeyboard(document) {
     document.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowUp" || e.key === "w") isUpArrowPressed = true;
-      if (e.key === "ArrowDown" || e.key === "s") isDownArrowPressed = true;
-      if (e.key === "ArrowLeft" || e.key === "a") isLeftArrowPressed = true;
-      if (e.key === "ArrowRight" || e.key === "d") isRightArrowPressed = true;
+      if (e.key === "ArrowUp" || e.key === "w") {
+        if (isFalling) return;
+        isUpArrowPressed = true;
+      }
+      if (e.key === "ArrowDown" || e.key === "s") {
+        if (isFalling) return;
+        isDownArrowPressed = true;
+      }
+      if (e.key === "ArrowLeft" || e.key === "a") {
+        if (isFalling) return;
+        isLeftArrowPressed = true;
+      }
+      if (e.key === "ArrowRight" || e.key === "d") {
+        if (isFalling) return;
+        isRightArrowPressed = true;
+      }
     });
 
     document.addEventListener("keyup", (e) => {
@@ -310,6 +324,22 @@ export class Player {
     this.pivotCrown.rotation.set(0, 0, 0);
 
     this.run();
+  }
+
+  smashed() {
+    this.body.rotation.x -= Math.PI / 90;
+    this.body.position.y -= 0.3;
+    isFalling = true;
+
+    // rotate arms
+    this.pivotShoulderRight.rotation.z = Math.PI / 2;
+    this.pivotShoulderLeft.rotation.z = Math.PI / 2;
+  }
+
+  reset() {
+    this.body.position.set(0, 0, 90);
+    this.body.rotation.set(0, Math.PI / 2, 0);
+    isFalling = false;
   }
 
   init(scene) {

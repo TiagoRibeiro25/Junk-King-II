@@ -27,6 +27,8 @@ const fingerPositions = [
   { x: 5, y: 4, z: 0, rotation: 1.55 },
 ];
 
+let handStop = false;
+
 export class GiantHand {
   constructor() {
     this.firstArmPivot = new THREE.Object3D();
@@ -131,8 +133,22 @@ export class GiantHand {
     handSound.volume = handVolume;
   }
 
+  toggleHand() {
+    handStop = !handStop;
+  }
+
+  resetFingers() {
+    this.fingerPivots.forEach((fingerPivot, index) => {
+      // Thumb Finger
+      if (index === 0) fingerPivot.rotation.y = 0;
+      // Other fingers
+      else fingerPivot.rotation.x = 0;
+    });
+  }
+
   animate(handVolume) {
-    this.animateArm(handVolume);
+    if (handStop) return;
     this.animateFingers();
+    this.animateArm(handVolume);
   }
 }

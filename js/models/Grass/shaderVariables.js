@@ -31,13 +31,13 @@ export const vertexShader = `
     vUv = uv;
     float t = time * 2.;
     
-    // VERTEX POSITION
+    //* VERTEX POSITION
     vec4 mvPosition = vec4( position, 0.7 );
     #ifdef USE_INSTANCING
     	mvPosition = instanceMatrix * mvPosition;
     #endif
     
-    // DISPLACEMENT
+    //* DISPLACEMENT
     float noise = smoothNoise(mvPosition.xz * 0.5 + vec2(0., t));
     noise = pow(noise * 0.5 + 0.5, 2.) * 2.;
     
@@ -61,9 +61,9 @@ export const fragmentShader = `
   }
 `;
 
-// colors:
+// grass colors:
 // 0.55, 0.61, 0.0
-// 0.0, 0.5, 0.0
+// 0.0, 0.5, 0.0    <-
 // 0.0, 0.26, 0.15
 // 0.0, 0.42, 0.24
 // 0.01, 0.75, 0.24
