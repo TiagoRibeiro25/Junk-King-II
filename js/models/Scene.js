@@ -46,7 +46,7 @@ export class Scene {
     this.sunLight.shadow.camera.right = 150;
     this.sunLight.shadow.camera.top = -100;
     this.sunLight.shadow.camera.bottom = 100;
-    this.sunLight.intensity = 3;
+    this.sunLight.intensity = 2;
     this.scene.add(this.sunLight);
   }
 

@@ -36,7 +36,7 @@ export function game() {
   function render() {
     scene.renderer.render(scene.scene, scene.camera);
 
-    scene.rotateSun(5000); // speed of rotation
+    scene.rotateSun(3000); // speed of rotation
     player.update();
     giantHand.animate(getVolumeByDistance(player.body.position)); // volume of sound
     grass.animate(scene.renderer, scene.scene, scene.camera);
