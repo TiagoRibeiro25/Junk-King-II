@@ -320,6 +320,7 @@ export class Player {
       footStepSound.pause();
       return;
     }
+
     if (isRightArrowPressed) {
       this.body.position.x += this.body.position.x < 6 ? movementSpeed : 0;
       this.body.rotation.y = 0;

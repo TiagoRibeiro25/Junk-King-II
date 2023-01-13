@@ -4,7 +4,7 @@ export const simpleNoise = `
     }
     
     float smoothNoise( vec2 ip ){
-    	vec2 lv = fract( ip );
+      vec2 lv = fract( ip );
       vec2 id = floor( ip );
       
       lv = lv * lv * ( 3. - 2. * lv );
@@ -48,7 +48,6 @@ export const vertexShader = `
     
     vec4 modelViewPosition = modelViewMatrix * mvPosition;
     gl_Position = projectionMatrix * modelViewPosition;
-
 	}
 `;
 
@@ -56,7 +55,7 @@ export const fragmentShader = `
   varying vec2 vUv;
   
   void main() {
-  	vec3 baseColor = vec3( 0.41, 1.0, 0.5 );
+    vec3 baseColor = vec3( 0.41, 1.0, 0.5 );
     float clarity = ( vUv.y * 0.875 ) + 0.125;
     gl_FragColor = vec4( baseColor * clarity, 1 );
   }
