@@ -1,4 +1,4 @@
-export function addShadow(...params) {
+export default function addShadow(...params) {
   params.forEach((param) => {
     param.castShadow = true;
     param.receiveShadow = true;

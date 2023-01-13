@@ -1,5 +1,5 @@
 import * as THREE from "../../libs/three.module.js";
-import { addShadow } from "../addShadow.js";
+import addShadow from "../addShadow.js";
 
 const footStepSound = new Audio("./assets/sounds/footsteps.mp3");
 footStepSound.volume = 0.2;
@@ -36,6 +36,7 @@ let isLeftArrowPressed = false;
 let isUpArrowPressed = false;
 let isDownArrowPressed = false;
 
+// cube
 let geometry = new THREE.BoxGeometry(1.5, 0.5, 0.5);
 let material = new THREE.MeshNormalMaterial();
 
@@ -66,6 +67,7 @@ export class Player {
 
   createBody(scene) {
     this.body.position.set(0, 0, 90);
+    this.body.rotation.y = Math.PI / 2;
 
     scene.add(this.body);
 
@@ -92,6 +94,15 @@ export class Player {
         new THREE.MeshBasicMaterial({ color: 0xffffff })
       );
       eye.position.set(0.7, 0.2, eyesZ[i]);
+
+      // black pupil
+      const pupil = new THREE.Mesh(
+        new THREE.SphereGeometry(0.05, 10, 10),
+        new THREE.MeshBasicMaterial({ color: 0x000000 })
+      );
+      pupil.position.set(0.1, 0, 0);
+      eye.add(pupil);
+
       this.head.add(eye);
     }
 

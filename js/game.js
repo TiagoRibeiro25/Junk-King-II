@@ -1,11 +1,11 @@
-import { getVolumeByDistance } from "./getVolumeByDistance.js";
+import getVolumeByDistance from "./getVolumeByDistance.js";
 import { GiantHand } from "./models/GiantHand.js";
 import { Grass } from "./models/Grass.js";
 import { Player } from "./models/Player.js";
 import { Scene } from "./models/Scene.js";
-import { updateCamera } from "./updateCamera.js";
+import updateCamera from "./updateCamera.js";
 
-export function game() {
+export default function game() {
   // ? Load scene
   const scene = new Scene();
   scene.init();

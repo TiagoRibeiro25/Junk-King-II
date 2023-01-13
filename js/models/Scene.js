@@ -1,6 +1,6 @@
 import { OrbitControls } from "../../libs/OrbitControls.js";
 import * as THREE from "../../libs/three.module.js";
-import { addShadow } from "../addShadow.js";
+import addShadow from "../addShadow.js";
 
 export class Scene {
   constructor() {

@@ -1,5 +1,5 @@
 import * as THREE from "../../libs/three.module.js";
-import { addShadow } from "../addShadow.js";
+import addShadow from "../addShadow.js";
 import { fragmentShader, vertexShader } from "./Grass/shaderVariables.js";
 
 const uniforms = {

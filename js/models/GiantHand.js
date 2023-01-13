@@ -1,5 +1,5 @@
 import * as THREE from "../../libs/three.module.js";
-import { addShadow } from "../addShadow.js";
+import addShadow from "../addShadow.js";
 const handSound = new Audio("../../assets/sounds/handV2.mp3");
 
 // Geometries
