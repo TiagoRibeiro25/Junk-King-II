@@ -104,9 +104,10 @@ export class Player {
     this.head.add(this.pivotCrown);
 
     // Crown
+    const crownTexture = new THREE.TextureLoader().load("../../assets/gold.jpg");
     const crown = new THREE.Mesh(
       new THREE.TorusGeometry(0.8, 0.1, 3, 5),
-      new THREE.MeshBasicMaterial({ color: 0xffff00 })
+      new THREE.MeshStandardMaterial({ map: crownTexture })
     );
     crown.rotation.set(-Math.PI / 2, 0, 0);
     crown.position.set(0, 0.1, 0);
@@ -120,10 +121,11 @@ export class Player {
       { x: -0.6, y: -0.4, z: 0.2 },
       { x: -0.6, y: 0.4, z: 0.2 },
     ];
+
     for (const position of positions) {
       const pyramid = new THREE.Mesh(
         new THREE.ConeGeometry(0.2, 0.3, 3),
-        new THREE.MeshStandardMaterial({ color: 0xffff00 })
+        new THREE.MeshStandardMaterial({ map: crownTexture })
       );
       pyramid.rotation.set(Math.PI / 2, 0, 0);
       pyramid.position.set(position.x, position.y, position.z);

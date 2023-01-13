@@ -53,6 +53,5 @@ export function game() {
     scene.renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
-  // window.onload = () => render();
   render();
 }

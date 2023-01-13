@@ -69,12 +69,24 @@ export class Scene {
 
   addSkyBox() {
     const materialArray = [];
-    const texture_ft = new THREE.TextureLoader().load("../../assets/heather_ft.jpg");
-    const texture_bk = new THREE.TextureLoader().load("../../assets/heather_bk.jpg");
-    const texture_up = new THREE.TextureLoader().load("../../assets/heather_up.jpg");
-    const texture_dn = new THREE.TextureLoader().load("../../assets/heather_dn.jpg");
-    const texture_rt = new THREE.TextureLoader().load("../../assets/heather_rt.jpg");
-    const texture_lf = new THREE.TextureLoader().load("../../assets/heather_lf.jpg");
+    const texture_ft = new THREE.TextureLoader().load(
+      "../../assets/skyBox/heather_ft.jpg"
+    );
+    const texture_bk = new THREE.TextureLoader().load(
+      "../../assets/skyBox/heather_bk.jpg"
+    );
+    const texture_up = new THREE.TextureLoader().load(
+      "../../assets/skyBox/heather_up.jpg"
+    );
+    const texture_dn = new THREE.TextureLoader().load(
+      "../../assets/skyBox/heather_dn.jpg"
+    );
+    const texture_rt = new THREE.TextureLoader().load(
+      "../../assets/skyBox/heather_rt.jpg"
+    );
+    const texture_lf = new THREE.TextureLoader().load(
+      "../../assets/skyBox/heather_lf.jpg"
+    );
 
     materialArray.push(new THREE.MeshBasicMaterial({ map: texture_ft }));
     materialArray.push(new THREE.MeshBasicMaterial({ map: texture_bk }));
@@ -92,10 +104,6 @@ export class Scene {
     this.scene.add(skyBox);
   }
 
-  /**
-   * This function rotates the sun around the scene by changing the position of the sun light.
-   * @param rotationSpeed - The speed at which the sun rotates around the scene.
-   */
   rotateSun(rotationSpeed) {
     this.sunLight.position.x = 40 * Math.sin(Date.now() / rotationSpeed);
     this.sunLight.position.z = 40 * Math.cos(Date.now() / rotationSpeed);

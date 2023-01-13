@@ -32,14 +32,12 @@ export const vertexShader = `
     float t = time * 2.;
     
     // VERTEX POSITION
-    
     vec4 mvPosition = vec4( position, 0.7 );
     #ifdef USE_INSTANCING
     	mvPosition = instanceMatrix * mvPosition;
     #endif
     
     // DISPLACEMENT
-    
     float noise = smoothNoise(mvPosition.xz * 0.5 + vec2(0., t));
     noise = pow(noise * 0.5 + 0.5, 2.) * 2.;
     
@@ -47,7 +45,6 @@ export const vertexShader = `
     
     float displacement = noise * ( 0.3 * dispPower );
     mvPosition.z -= displacement;
-    
     
     vec4 modelViewPosition = modelViewMatrix * mvPosition;
     gl_Position = projectionMatrix * modelViewPosition;

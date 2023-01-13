@@ -53,7 +53,7 @@ export class Grass {
   }
 
   animate() {
-    // Hand a time variable to vertex shader for wind displacement.
+    // time variable -> vertex shader for wind displacement.
     leavesMaterial.uniforms.time.value = this.clock.getElapsedTime();
     leavesMaterial.uniformsNeedUpdate = true;
   }
