@@ -47,8 +47,13 @@ export class Scene {
     this.sunLight.shadow.camera.right = 100;
     this.sunLight.shadow.camera.top = -100;
     this.sunLight.shadow.camera.bottom = 100;
-
+    this.sunLight.intensity = 2;
     this.scene.add(this.sunLight);
+
+    // ambient light to prevent shadows from being too dark
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    ambientLight.intensity = 0.25;
+    this.scene.add(ambientLight);
   }
 
   addFloor() {
@@ -74,22 +79,22 @@ export class Scene {
   addSkyBox() {
     const materialArray = [];
     const texture_ft = new THREE.TextureLoader().load(
-      "../../assets/skyBox/heather_ft.jpg"
+      "../../assets/skyBox/yonder_ft.jpg"
     );
     const texture_bk = new THREE.TextureLoader().load(
-      "../../assets/skyBox/heather_bk.jpg"
+      "../../assets/skyBox/yonder_bk.jpg"
     );
     const texture_up = new THREE.TextureLoader().load(
-      "../../assets/skyBox/heather_up.jpg"
+      "../../assets/skyBox/yonder_up.jpg"
     );
     const texture_dn = new THREE.TextureLoader().load(
-      "../../assets/skyBox/heather_dn.jpg"
+      "../../assets/skyBox/yonder_dn.jpg"
     );
     const texture_rt = new THREE.TextureLoader().load(
-      "../../assets/skyBox/heather_rt.jpg"
+      "../../assets/skyBox/yonder_rt.jpg"
     );
     const texture_lf = new THREE.TextureLoader().load(
-      "../../assets/skyBox/heather_lf.jpg"
+      "../../assets/skyBox/yonder_lf.jpg"
     );
 
     materialArray.push(new THREE.MeshBasicMaterial({ map: texture_ft }));

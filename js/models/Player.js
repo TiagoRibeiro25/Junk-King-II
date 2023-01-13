@@ -117,7 +117,9 @@ export class Player {
     this.head.add(this.pivotCrown);
 
     // Crown
-    const crownTexture = new THREE.TextureLoader().load("../../assets/gold.jpg");
+    const crownTexture = new THREE.TextureLoader().load(
+      "../../assets/gold.jpg"
+    );
     const crown = new THREE.Mesh(
       new THREE.TorusGeometry(0.8, 0.1, 3, 5),
       new THREE.MeshStandardMaterial({ map: crownTexture })
@@ -145,7 +147,10 @@ export class Player {
       crown.add(pyramid);
     }
 
-    addShadow(crown, ...crown.children.filter((child) => child.type === "Mesh"));
+    addShadow(
+      crown,
+      ...crown.children.filter((child) => child.type === "Mesh")
+    );
   }
 
   createShoulders() {

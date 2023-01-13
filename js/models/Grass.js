@@ -17,7 +17,7 @@ const leavesMaterial = new THREE.ShaderMaterial({
 });
 
 // MESH
-const instanceNumber = 30000;
+const instanceNumber = 25000;
 const dummy = new THREE.Object3D();
 
 const geometry = new THREE.PlaneGeometry(0.1, 1, 4);

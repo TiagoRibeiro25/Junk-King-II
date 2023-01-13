@@ -2,8 +2,8 @@ import getVolumeByDistance from "./getVolumeByDistance.js";
 import handleHandOnPlayer from "./handleHandOnPlayer.js";
 import { GiantHand } from "./models/GiantHand.js";
 import { Grass } from "./models/Grass.js";
-import { Player } from "./models/Player.js";
 import { yellowPacman } from "./models/Pacman.js";
+import { Player } from "./models/Player.js";
 import { Scene } from "./models/Scene.js";
 import updateCamera from "./updateCamera.js";
 
@@ -42,7 +42,7 @@ export default function game() {
   function render() {
     scene.renderer.render(scene.scene, scene.camera);
 
-    scene.rotateSun(3000); // speed of rotation
+    scene.rotateSun(5000); // speed of rotation
     player.update();
     giantHand.animate(getVolumeByDistance(player.body.position)); // volume of sound
     grass.animate(scene.renderer, scene.scene, scene.camera);
