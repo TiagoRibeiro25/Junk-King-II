@@ -3,6 +3,7 @@ import handleHandOnPlayer from "./handleHandOnPlayer.js";
 import { GiantHand } from "./models/GiantHand.js";
 import { Grass } from "./models/Grass.js";
 import { Player } from "./models/Player.js";
+import { yellowPacman } from "./models/Pacman.js";
 import { Scene } from "./models/Scene.js";
 import updateCamera from "./updateCamera.js";
 
@@ -25,6 +26,10 @@ export default function game() {
   // ? Load Giant Hand
   const giantHand = new GiantHand();
   giantHand.init(scene.scene);
+
+  // ? Load yellow Pacman
+  const pacmanYellow_ = new yellowPacman();
+  pacmanYellow_.init(scene.scene);
 
   // ? Load Grass
   const grass = new Grass();
