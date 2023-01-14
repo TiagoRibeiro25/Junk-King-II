@@ -9,8 +9,12 @@ const fingerGeometry = new THREE.BoxGeometry(10, 4, 4);
 const sphereGeometry = new THREE.SphereGeometry(7, 32, 32);
 
 // Textures
-const firstSkinTexture = new THREE.TextureLoader().load("../../assets/metal1.jpg");
-const secondSkinTexture = new THREE.TextureLoader().load("../../assets/metal2.jpg");
+const firstSkinTexture = new THREE.TextureLoader().load(
+  "../../assets/metal1.jpg"
+);
+const secondSkinTexture = new THREE.TextureLoader().load(
+  "../../assets/metal2.jpg"
+);
 
 // Positions
 const fingerPivotPositions = [
@@ -42,15 +46,18 @@ export class GiantHand {
     this.fingerPivots = [];
   }
 
-  init(scene) {
+  init(scene, handPositions, handRotations) {
     const firstArm = new THREE.Mesh(
       armGeometry,
       new THREE.MeshStandardMaterial({ map: firstSkinTexture })
     );
-    firstArm.position.x = -40;
-    firstArm.position.y = 2;
-    firstArm.position.z = 60;
-    firstArm.rotation.z = 1.55;
+    firstArm.position.x = handPositions.x;
+    firstArm.position.y = handPositions.y;
+    firstArm.position.z = handPositions.z;
+
+    firstArm.rotation.x = handRotations.x;
+    firstArm.rotation.y = handRotations.y;
+    firstArm.rotation.z = handRotations.z;
     scene.add(firstArm);
 
     // add pivot to the end of the firstArm

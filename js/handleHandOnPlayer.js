@@ -1,5 +1,13 @@
-export default function handleHandOnPlayer(player, giantHand) {
-  if (player.body.position.z > 55 && player.body.position.z < 69) {
+export default function handleHandOnPlayer(
+  player,
+  giantHand,
+  minPosition,
+  maxPosition
+) {
+  if (
+    player.body.position.z > minPosition &&
+    player.body.position.z < maxPosition
+  ) {
     if (giantHand.sphere.rotation.z < 1.9) {
       giantHand.toggleHand();
       giantHand.sphere.rotation.z = 1.8;

@@ -25,7 +25,15 @@ export default function game() {
 
   // ? Load Giant Hand
   const giantHand = new GiantHand();
-  giantHand.init(scene.scene);
+  giantHand.init(scene.scene, { x: -40, y: 2, z: 60 }, { x: 0, y: 0, z: 1.55 });
+
+  // Second giant hand
+  const giantHand2 = new GiantHand();
+  giantHand2.init(
+    scene.scene,
+    { x: 30, y: 2, z: 30 },
+    { x: 0, y: Math.PI, z: 1.55 }
+  );
 
   // ? Load yellow Pacman
   const pacmanYellow_ = new yellowPacman();
@@ -44,13 +52,18 @@ export default function game() {
 
     scene.rotateSun(5000); // speed of rotation
     player.update();
+
     giantHand.animate(getVolumeByDistance(player.body.position)); // volume of sound
+    giantHand2.animate(getVolumeByDistance(player.body.position)); // volume of sound
+
+    handleHandOnPlayer(player, giantHand, 55, 69);
+    handleHandOnPlayer(player, giantHand2, 20, 35);
+
     grass.animate(scene.renderer, scene.scene, scene.camera);
+
     updateCamera(scene, player);
 
     if (audio.paused) audio.play();
-
-    handleHandOnPlayer(player, giantHand);
 
     requestAnimationFrame(render);
   }
