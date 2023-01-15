@@ -2,7 +2,7 @@ import getVolumeByDistance from "./getVolumeByDistance.js";
 import handleHandOnPlayer from "./handleHandOnPlayer.js";
 import { GiantHand } from "./models/GiantHand.js";
 import { Grass } from "./models/Grass.js";
-import { yellowPacman } from "./models/Pacman.js";
+import { Pacman } from "./models/Pacman.js";
 import { Player } from "./models/Player.js";
 import { Scene } from "./models/Scene.js";
 import updateCamera from "./updateCamera.js";
@@ -36,8 +36,8 @@ export default function game() {
   );
 
   // ? Load yellow Pacman
-  const pacmanYellow_ = new yellowPacman();
-  pacmanYellow_.init(scene.scene);
+  const pacmanYellow = new Pacman();
+  pacmanYellow.init(scene.scene);
 
   // ? Load Grass
   const grass = new Grass();
