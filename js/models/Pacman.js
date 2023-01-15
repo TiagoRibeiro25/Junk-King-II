@@ -104,9 +104,6 @@ this.connectThirdRightFingerPivot = new THREE.Object3D();
 // add pivot to connect the shpere to the thumb finger right hand
 this.connectRightThumbFingerPivot = new THREE.Object3D();
 
-// ------------------------- PACMAN Velocity Movements--------------
-this.velocityMovementArm = 0.004;
-this.velocityMovementFingers = 0.01;
 }
 
 init(scene){
@@ -283,10 +280,102 @@ this.connectSecondRightFingerPivot.add(this.secondFingerRightHand);
 this.connectThirdRightFingerPivot.add(this.thirdFingerRightHand);
 this.rightThumbFingerConnection.add(this.thumbFingerRightHand);
 
+// ------------------------- PACMAN Velocity Movements--------------
+this.velocityMovementArm = 0.004;
+this.velocityMovementFingers = 0.01;
+
+// -------------------------- PACMAN rotations---------------------
+// rotations left side body
+this.leftArm.rotation.x = 1.55;
+this.leftShoulderSphere.rotation.x = 3.17;
+this.leftForeArm.rotation.x = 1.55;
+this.leftForeArm.rotation.y = 25
+this.leftFinger1Connection.rotation.x = 3.17;
+this.leftFinger2Connection.rotation.x = 3.17;
+this.leftFinger3Connection.rotation.x = 3.17;
+this.leftThumbFingerConnection.rotation.y = 30;
+
+// rotations right side body
+this.rightArm.rotation.x = 1.55;
+this.rightShoulderSphere.rotation.x = 3.17;
+this.rightForeArm.rotation.x = 1.55;
+this.rightForeArm.rotation.y = 25
+this.rightFinger1Connection.rotation.x = 3.17;
+this.rightFinger2Connection.rotation.x = 3.17;
+this.rightFinger3Connection.rotation.x = 3.17;
+this.rightThumbFingerConnection.rotation.y = 30;
+
+// rotation pivots left side body
+this.leftShoulderPivot.rotation.x = 1.55;
+this.leftForeArmPivot.rotation.x = 70;
+this.leftFinger1ConnectionPivot.rotation.x = 3;
+this.leftFinger2ConnectionPivot.rotation.x = 3;
+this.leftFinger3ConnectionPivot.rotation.x = 3;
+this.connectFirstLeftFingerPivot.rotation.x = 30;
+this.connectSecondLeftFingerPivot.rotation.x = 30;
+this.connectThirdLeftFingerPivot.rotation.x = 30;
+
+// rotation pivots right side body
+this.rightShoulderPivot.rotation.x = 1.55;
+this.rightForeArmPivot.rotation.x = 70;
+this.rightFinger1ConnectionPivot.rotation.x = 3;
+this.rightFinger2ConnectionPivot.rotation.x = 3;
+this.rightFinger3ConnectionPivot.rotation.x = 3;
+this.connectFirstRightFingerPivot.rotation.x = 30;
+this.connectSecondRightFingerPivot.rotation.x = 30;
+this.connectThirdRightFingerPivot.rotation.x = 30;
+
 // ---------------------PACMAN MODEL -------------------------------------------
 this.yellowPacman = new THREE.Group();
 this.yellowPacman.add( this.head1, this.head2, this.leftArm, this.rightArm, 
                         this.brain, this.leftEye, this.rightEye, this.mouth );
 scene.add(this.yellowPacman);
 }
+
+// ----------------------ANIMATION SECTION-------------------------------------
+animateArmShoulders(){
+ // rotation of the left shoulder on x axis
+    this.leftShoulderSphere.rotation.x += this.velocityMovementArm;
+    // rotation of the right shoulder on x axis
+    this.rightShoulderSphere.rotation.x += this.velocityMovementArm;
+
+    if ((this.leftShoulderSphere.rotation.x < 1.55 || this.leftShoulderSphere.rotation.x > 3.17) &&
+    (this.rightShoulderSphere.rotation.x < 1.55 || this.rightShoulderSphere.rotation.x > 3.17)) 
+    {
+// to control the rotation
+    this.velocityMovementArm = this.velocityMovementArm * -1    
+}
+  }
+
+  animateFingers(){
+// rotation of the fingers of left hand on x axis
+    this.leftFinger1Connection.rotation.x += this.velocityMovementFingers;
+    this.leftFinger2Connection.rotation.x += this.velocityMovementFingers;
+    this.leftFinger3Connection.rotation.x += this.velocityMovementFingers;
+ // rotation of the fingers of right hand on x axis
+    this.rightFinger1Connection.rotation.x += this.velocityMovementFingers;
+    this.rightFinger2Connection.rotation.x += this.velocityMovementFingers;
+    this.rightFinger3Connection.rotation.x += this.velocityMovementFingers;
+
+    if ((this.leftFinger1Connection.rotation.x < 1.55 || this.leftFinger1Connection.rotation.x > 3.17) && 
+         (this.leftFinger2Connection.rotation.x < 1.55 || this.leftFinger2Connection.rotation.x > 3.17) &&
+         (this.leftFinger3Connection.rotation.x < 1.55 || this.leftFinger3Connection.rotation.x > 3.17) && 
+        (this.rightFinger1Connection.rotation.x < 1.55 || this.rightFinger1Connection.rotation.x > 3.17) &&
+        (this.rightFinger2Connection.rotation.x < 1.55 || this.rightFinger2Connection.rotation.x > 3.17) &&
+        (this.rightFinger3Connection.rotation.x < 1.55 || this.rightFinger3Connection.rotation.x > 3.17) 
+         ) {
+// to control the rotation
+    this.velocityMovementFingers = this.velocityMovementFingers * -1    
+}
+  }
+
+  animateMouth(){
+    this.mouth.rotation.x -= 0.05;
+  }
+
+  animate(){
+    this.animateArmShoulders()
+    this.animateFingers()
+    this.animateMouth()
+  }
 }

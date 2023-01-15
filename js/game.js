@@ -59,6 +59,8 @@ export default function game() {
     handleHandOnPlayer(player, giantHand, 55, 69);
     handleHandOnPlayer(player, giantHand2, 20, 35);
 
+    pacmanYellow.animate();
+
     grass.animate(scene.renderer, scene.scene, scene.camera);
 
     updateCamera(scene, player);
