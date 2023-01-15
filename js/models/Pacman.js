@@ -282,7 +282,7 @@ this.rightThumbFingerConnection.add(this.thumbFingerRightHand);
 
 // ------------------------- PACMAN Velocity Movements--------------
 this.velocityMovementArm = 0.004;
-this.velocityMovementFingers = 0.01;
+this.velocityMovementFingers = 0.03;
 
 // -------------------------- PACMAN rotations---------------------
 // rotations left side body
@@ -329,7 +329,10 @@ this.connectThirdRightFingerPivot.rotation.x = 30;
 this.yellowPacman = new THREE.Group();
 this.yellowPacman.add( this.head1, this.head2, this.leftArm, this.rightArm, 
                         this.brain, this.leftEye, this.rightEye, this.mouth );
+
 scene.add(this.yellowPacman);
+this.yellowPacman.position.set(-15.5, -3, -50) 
+this.yellowPacman.scale.set(0.4, 0.4, 0.4) 
 }
 
 // ----------------------ANIMATION SECTION-------------------------------------
