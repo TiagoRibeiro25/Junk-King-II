@@ -117,7 +117,7 @@ export class Pacman {
     // add pivot to connect the sphere with the left forearm
     this.leftForeArmPivot = new THREE.Object3D();
     //  add pivot to the end of the left forearm
-    this.SecondLeftForeArmPivot = new THREE.Object3D();
+    this.secondLeftForeArmPivot = new THREE.Object3D();
     // pivot for the first finger left hand connection
     this.leftFinger1ConnectionPivot = new THREE.Object3D();
     // pivot for the second finger left hand connection
