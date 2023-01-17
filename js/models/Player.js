@@ -231,20 +231,17 @@ export class Player {
 
   enableKeyboard(document) {
     document.addEventListener("keydown", (e) => {
+      if (isFalling) return;
       if (e.key === "ArrowUp" || e.key === "w") {
-        if (isFalling) return;
         isUpArrowPressed = true;
       }
       if (e.key === "ArrowDown" || e.key === "s") {
-        if (isFalling) return;
         isDownArrowPressed = true;
       }
       if (e.key === "ArrowLeft" || e.key === "a") {
-        if (isFalling) return;
         isLeftArrowPressed = true;
       }
       if (e.key === "ArrowRight" || e.key === "d") {
-        if (isFalling) return;
         isRightArrowPressed = true;
       }
     });
@@ -335,6 +332,12 @@ export class Player {
     this.body.rotation.x -= Math.PI / 90;
     this.body.position.y -= 0.3;
     isFalling = true;
+
+    // prevent the user from moving the character
+    isRightArrowPressed = false;
+    isLeftArrowPressed = false;
+    isUpArrowPressed = false;
+    isDownArrowPressed = false;
 
     // rotate arms
     this.pivotShoulderRight.rotation.z = Math.PI / 2;
