@@ -180,7 +180,7 @@ export class Pacman {
     // mesh mouth
     this.mouth = new THREE.Mesh(mouthGeometry, mouthMaterial);
     this.mouth.position.set(-0, 5, -5);
-    // to rotate/invert the semi-sphere  to create the ilusion of the mouth of the pacman
+    // to rotate/invert the semi-sphere  to create the illusion of the mouth of the pacman
     this.mouth.rotation.x = Math.PI / true;
     this.mouth.rotateX(THREE.Math.degToRad(-5));
 

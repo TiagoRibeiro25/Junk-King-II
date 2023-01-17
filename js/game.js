@@ -57,7 +57,7 @@ export default function game() {
     giantHand2.animate(getVolumeByDistance(player.body.position)); // volume of sound
 
     handleHandOnPlayer(player, giantHand, 55, 69);
-    handleHandOnPlayer(player, giantHand2, 20, 35);
+    handleHandOnPlayer(player, giantHand2, 22, 34);
 
     pacmanYellow.animate();
 
