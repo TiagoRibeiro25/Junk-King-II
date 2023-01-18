@@ -446,6 +446,13 @@ export class Pacman {
     scene.add(this.yellowPacman);
     this.yellowPacman.position.set(-15.5, -3, -50);
     this.yellowPacman.scale.set(0.4, 0.4, 0.4);
+    addShadow(
+      this.head1,
+      this.head2,
+      this.leftArm,
+      this.rightArm,
+      this.mouth
+      )
   }
 
   // ----------------------ANIMATION SECTION-------------------------------------
