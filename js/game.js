@@ -3,6 +3,10 @@ import handleHandOnPlayer from "./handleHandOnPlayer.js";
 import { GiantHand } from "./models/GiantHand.js";
 import { Grass } from "./models/Grass.js";
 import { Pacman } from "./models/Pacman.js";
+import { PlasticTrash } from "./models/plasticTrash.js";
+import { PaperTrash } from "./models/paperTrash.js";
+import { GlassTrash } from "./models/glassTrash.js";
+import { BatteryTrash } from "./models/batteryTrash.js";
 import { Player } from "./models/Player.js";
 import { Scene } from "./models/Scene.js";
 import updateCamera from "./updateCamera.js";
@@ -23,6 +27,23 @@ export default function game() {
   player.enableKeyboard(document);
   scene.camera.lookAt(player.body.position);
 
+  // Load plastic
+  const plastic = new PlasticTrash();
+  plastic.init(scene.scene, {x: -14, y: 0, z: 95});
+
+  // Load battery
+  const battery = new BatteryTrash();
+  battery.init(scene.scene, {x: -8, y: 0, z: 95})
+
+  // Load Paper
+  const paper = new PaperTrash();
+  paper.init(scene.scene,  {x: -2, y: 0, z: 95})
+
+  // Load glass
+  const glass = new GlassTrash();
+  glass.init(scene.scene, {x: 4, y: 0, z: 95})
+
+ 
   // ? Load Giant Hand
   const giantHand = new GiantHand();
   giantHand.init(scene.scene, { x: -40, y: 2, z: 60 }, { x: 0, y: 0, z: 1.55 });
@@ -34,6 +55,7 @@ export default function game() {
     { x: 30, y: 2, z: 30 },
     { x: 0, y: Math.PI, z: 1.55 }
   );
+  
 
   // ? Load yellow Pacman
   const pacmanYellow = new Pacman();
