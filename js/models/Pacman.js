@@ -21,7 +21,6 @@ const headGeometry2 = new THREE.SphereGeometry(
   0,
   Math.PI / 2
 );
-const headMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
 
 // BRAIN
 const brainGeometry = new THREE.SphereGeometry(
@@ -45,7 +44,6 @@ const mouthGeometry = new THREE.SphereGeometry(
   0,
   Math.PI / 2
 );
-const mouthMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
 
 // EYES
 const EyeGeometry = new THREE.SphereGeometry(1, 12, 12);
@@ -69,10 +67,6 @@ const ForeArmMaterial = new THREE.MeshBasicMaterial({ color: 0xaea758 });
 
 // HANDS
 const HandGeometry = new THREE.BoxGeometry(2, 1.95, 1);
-const HandMaterial = new THREE.MeshBasicMaterial({
-  color: 0xdbc114,
-  wireframe: false,
-});
 
 // FINGERS AND THERE CONNECTIONS
 const Finger1HandGeometry = new THREE.BoxGeometry(0.5, 0.95, 2.35);
@@ -102,11 +96,6 @@ const ThumbFingerConnectionHandMaterial = new THREE.MeshBasicMaterial({
   color: 0xaea758,
 });
 
-// ARMS AND SHOULDERS
-const ArmMaterial = new THREE.MeshBasicMaterial({
-  color: 0xdbc114,
-  wireframe: false,
-});
 const ShoulderSphereMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 
 export class Pacman {
@@ -158,15 +147,32 @@ export class Pacman {
     this.connectRightThumbFingerPivot = new THREE.Object3D();
   }
 
-  init(scene) {
+  init(scene,
+       positionX,
+       positionY,
+       positionZ,
+       scaleX,
+       scaleY,
+       scaleZ,
+       headColor,
+       armColor,
+       handColor
+    ) {
+
+      // PACMAN COLOR
+    this.headMaterial = new THREE.MeshBasicMaterial({ color: headColor });
+    this.ArmMaterial = new THREE.MeshBasicMaterial({color: armColor});
+    this.HandMaterial = new THREE.MeshBasicMaterial({color: handColor});
+    this.mouthMaterial = new THREE.MeshBasicMaterial({ color: headColor });
+
     // --------------- PACMAN Meshes-------------------------
     // mesh first half head
-    this.head1 = new THREE.Mesh(headGeometry, headMaterial);
+    this.head1 = new THREE.Mesh(headGeometry, this.headMaterial);
     this.head1.rotateX(THREE.Math.degToRad(-15));
     this.head1.position.set(-0, 5, -5);
 
     // mesh second half head
-    this.head2 = new THREE.Mesh(headGeometry2, headMaterial);
+    this.head2 = new THREE.Mesh(headGeometry2, this.headMaterial);
     this.head2.position.set(-0, 5, -5);
     this.head2.rotation.x = Math.PI / true;
     this.head2.rotateX(THREE.Math.degToRad(25));
@@ -178,7 +184,7 @@ export class Pacman {
     this.brain.position.z = -5;
 
     // mesh mouth
-    this.mouth = new THREE.Mesh(mouthGeometry, mouthMaterial);
+    this.mouth = new THREE.Mesh(mouthGeometry, this.mouthMaterial);
     this.mouth.position.set(-0, 5, -5);
     // to rotate/invert the semi-sphere  to create the illusion of the mouth of the pacman
     this.mouth.rotation.x = Math.PI / true;
@@ -193,7 +199,7 @@ export class Pacman {
     this.rightEye.position.set(2, 9, 1);
 
     // mesh left Arm
-    this.leftArm = new THREE.Mesh(ArmGeometry, ArmMaterial);
+    this.leftArm = new THREE.Mesh(ArmGeometry, this.ArmMaterial);
     this.leftArm.position.set(-7, 7, -5);
 
     // mesh sphere for the left shoulder
@@ -207,7 +213,7 @@ export class Pacman {
     this.leftForeArm.position.z = 4;
 
     //mesh left hand
-    this.leftHand = new THREE.Mesh(HandGeometry, HandMaterial);
+    this.leftHand = new THREE.Mesh(HandGeometry, this.HandMaterial);
     this.leftHand.position.y = 0.4;
 
     // mesh fingers and there connections
@@ -252,7 +258,7 @@ export class Pacman {
     // ----RIGHT SIDE BODY -----
 
     // mesh right Arm
-    this.rightArm = new THREE.Mesh(ArmGeometry, ArmMaterial);
+    this.rightArm = new THREE.Mesh(ArmGeometry, this.ArmMaterial);
     this.rightArm.position.set(7, 7, -5);
 
     //mesh sphere for the right shoulder
@@ -267,7 +273,7 @@ export class Pacman {
     this.rightForeArm.position.z = 4;
 
     //mesh right hand
-    this.rightHand = new THREE.Mesh(HandGeometry, HandMaterial);
+    this.rightHand = new THREE.Mesh(HandGeometry, this.HandMaterial);
     this.rightHand.position.y = 0.4;
 
     // fingers and there connections
@@ -444,8 +450,9 @@ export class Pacman {
     );
 
     scene.add(this.yellowPacman);
-    this.yellowPacman.position.set(-15.5, -3, -50);
-    this.yellowPacman.scale.set(0.4, 0.4, 0.4);
+    this.yellowPacman.position.set(positionX, positionY, positionZ);
+    this.yellowPacman.scale.set(scaleX, scaleY, scaleZ);
+
     addShadow(
       this.head1,
       this.head2,
