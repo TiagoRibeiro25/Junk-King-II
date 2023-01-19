@@ -52,7 +52,7 @@ export class Scene {
 
     // ambient light to prevent shadows from being too dark
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    ambientLight.intensity = 0.25;
+    ambientLight.intensity = 0.10;
     this.scene.add(ambientLight);
   }
 
