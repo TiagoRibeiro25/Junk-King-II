@@ -29,21 +29,20 @@ export default function game() {
 
   // Load plastic
   const plastic = new PlasticTrash();
-  plastic.init(scene.scene, {x: -14, y: 0, z: 95});
+  plastic.init(scene.scene, { x: -14, y: 0, z: 95 });
 
   // Load battery
   const battery = new BatteryTrash();
-  battery.init(scene.scene, {x: -8, y: 0, z: 95})
+  battery.init(scene.scene, { x: -8, y: 0, z: 95 });
 
   // Load Paper
   const paper = new PaperTrash();
-  paper.init(scene.scene,  {x: -2, y: 0, z: 95})
+  paper.init(scene.scene, { x: -2, y: 0, z: 95 });
 
   // Load glass
   const glass = new GlassTrash();
-  glass.init(scene.scene, {x: 4, y: 0, z: 95})
+  glass.init(scene.scene, { x: 4, y: 0, z: 95 });
 
- 
   // ? Load Giant Hand
   const giantHand = new GiantHand();
   giantHand.init(scene.scene, { x: -40, y: 2, z: 60 }, { x: 0, y: 0, z: 1.55 });
@@ -55,49 +54,85 @@ export default function game() {
     { x: 30, y: 2, z: 30 },
     { x: 0, y: Math.PI, z: 1.55 }
   );
-  
+
   // ? Load yellow Pacman
   const pacmanYellow = new Pacman();
-  pacmanYellow.init(scene.scene,
-                    -10.5, -3.8, -50,
-                    0.4, 0.4, 0.4,
-                    0xffff00, 0xdbc114, 0xdbc114, 0xffff00
-            );
+  pacmanYellow.init(
+    scene.scene,
+    // position pacman x y z
+    -10.5, // x
+    -3.8, // y
+    -50, // z
+    // scale pacman x y z
+    0.4, // x
+    0.4, // y
+    0.4, // z
+    // colors pacman
+    0xffff00, //color head1
+    0xdbc114, //color arm
+    0xdbc114, //color hand
+    0xffff00 //color head2
+  );
 
   // ? Load green Pacman
   const pacmanGreen = new Pacman();
-  pacmanGreen.init(scene.scene,
-                    1.30, -3.8, -50,
-                    0.4, 0.4, 0.4,
-                   0x6FF801, 0x1E9B1C, 0x1E9B1C, 0x6FF801
-            );
+  pacmanGreen.init(
+    scene.scene,
+    // position pacman x y z
+    1.3, // x
+    -3.8, // y
+    -50, // z
+    // scale pacman x y z
+    0.4, // x
+    0.4, // y
+    0.4, // z
+    // colors pacman
+    0x6ff801, //color head1
+    0x1e9b1c, //color arm
+    0x1e9b1c, //color hand
+    0x6ff801 //color head2
+  );
 
-
-            // TODO = ROTATE green pacman
+  // TODO = ROTATE green pacman
   // ? Load green Pacman
   const pacmanBlue = new Pacman();
-  pacmanBlue.init(scene.scene,
-                    // position pacman x y z
-                    -14.00, -3.8, -20,
-                    // scale pacman x y z
-                    0.4, 0.4, 0.4,
-                   0x054CF7, 0x3BA7EF, 0x3BA7EF, 0x054CF7,
-                    // rotate y axis pacman
-                    // 180
+  pacmanBlue.init(
+    scene.scene,
+    // position pacman x y z
+    -14.0, //x
+    -3.8, // y
+    -20, // z
+    // scale pacman x y z
+    0.4, //x
+    0.4, //y
+    0.4, //z
+    // colors pacman
+    0x054cf7, //color head1
+    0x3ba7ef, //color arm
+    0x3ba7ef, //color hand
+    0x054cf7 //color head2
+  );
 
-                   );
-
-
-            // TODO = ROTATE red pacman
+  // TODO = ROTATE red pacman
   // ? Load red Pacman
   const pacmanRed = new Pacman();
-  pacmanRed.init(scene.scene,
-                    4.60, -3.8, -20,
-                    0.4, 0.4, 0.4,
-                   0xF11212, 0xBB4242, 0xBB4242, 0xF11212
-            );
+  pacmanRed.init(
+    scene.scene,
+    // position pacman x y z
+    4.6, //x
+    -3.8, //y
+    -20, //z
+    // scale pacman x y z
+    0.4, //x
+    0.4, //y
+    0.4, //z
+    // colors pacman
+    0xf11212, //color head1
+    0xbb4242, //color arm
+    0xbb4242, //color hand
+    0xf11212 //color head2
+  );
 
-    
   // ? Load Grass
   const grass = new Grass();
   grass.init(scene.scene);
