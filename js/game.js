@@ -59,7 +59,7 @@ export default function game() {
   // ? Load yellow Pacman
   const pacmanYellow = new Pacman();
   pacmanYellow.init(scene.scene,
-                    -9.5, -3.8, -50,
+                    -10.5, -3.8, -50,
                     0.4, 0.4, 0.4,
                     0xffff00, 0xdbc114, 0xdbc114, 0xffff00
             );
@@ -67,7 +67,7 @@ export default function game() {
   // ? Load green Pacman
   const pacmanGreen = new Pacman();
   pacmanGreen.init(scene.scene,
-                    -1.30, -3.8, -50,
+                    1.30, -3.8, -50,
                     0.4, 0.4, 0.4,
                    0x6FF801, 0x1E9B1C, 0x1E9B1C, 0x6FF801
             );
@@ -92,7 +92,7 @@ export default function game() {
   // ? Load red Pacman
   const pacmanRed = new Pacman();
   pacmanRed.init(scene.scene,
-                    6.60, -3.8, -20,
+                    4.60, -3.8, -20,
                     0.4, 0.4, 0.4,
                    0xF11212, 0xBB4242, 0xBB4242, 0xF11212
             );
