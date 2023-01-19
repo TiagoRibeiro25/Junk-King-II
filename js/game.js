@@ -131,35 +131,33 @@ export default function game() {
   audio.volume = 0.03;
 
   // Pick up trash
- 
-  let isHoldingTrash = false
-    document.addEventListener("keydown", (e) => {
-      let rand = Math.random() * 6;
-      rand = Math.floor(rand);
+  let currentTrash = trash;
 
+  let isHoldingTrash = false
+  
+    document.addEventListener("keydown", (e) => {
       if (!isHoldingTrash) {
         if(e.code === "Space"){
-          if((player.body.position.x - trash.trashItem.position.x) < 1 && (player.body.position.z - trash.trashItem.position.z) < 1){
-            player.body.add(trash.trashItem)
-            trash.trashItem.position.set(2,2,2)
+          if((player.body.position.x - currentTrash.trashItem.position.x) < 1 && (player.body.position.z - currentTrash.trashItem.position.z) < 1){
+            player.body.add(currentTrash.trashItem)
+            currentTrash.trashItem.position.set(2,2,2)
             isHoldingTrash = true
-            console.log(isHoldingTrash);
           }
         }
-        if (isHoldingTrash) {
-          if(e.code === "Space"){
-            player.body.remove(trash.trashItem)
-            const trash = new PlasticTrash();
-            trash.init(scene.scene, { x: rand, y: -3.5, z: 95 });
-            isHoldingTrash = false
-            console.log(isHoldingTrash);
-          }  
-        }
-        
-      }
-      console.log(isHoldingTrash);
       
+      }
     })
+    document.addEventListener("keydown", e => {
+      if (isHoldingTrash) {
+        if (e.code === "Enter") {
+          player.body.remove(currentTrash.trashItem);
+          isHoldingTrash = false;
+          currentTrash = new PlasticTrash();
+          currentTrash.init(scene.scene, { x: -4, y: -3.5, z: 95 });
+        }
+      }
+});
+
   
 
   
