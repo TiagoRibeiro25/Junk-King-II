@@ -3,10 +3,7 @@ import handleHandOnPlayer from "./handleHandOnPlayer.js";
 import { GiantHand } from "./models/GiantHand.js";
 import { Grass } from "./models/Grass.js";
 import { Pacman } from "./models/Pacman.js";
-import { PlasticTrash } from "./models/plasticTrash.js";
-import { PaperTrash } from "./models/paperTrash.js";
-import { GlassTrash } from "./models/glassTrash.js";
-import { BatteryTrash } from "./models/batteryTrash.js";
+import { Trash } from "./models/Trash.js";
 import { Player } from "./models/Player.js";
 import { Scene } from "./models/Scene.js";
 import updateCamera from "./updateCamera.js";
@@ -28,8 +25,8 @@ export default function game() {
   scene.camera.lookAt(player.body.position);
 
   // Load plastic
-  const trash = new PlasticTrash();
-  trash.init(scene.scene, { x: -4, y: -3.5, z: 95 });
+  const trash = new Trash();
+  trash.init(scene.scene, { x: -4, y: -4, z: 95 });
 
 
   // ? Load Giant Hand
@@ -148,11 +145,11 @@ export default function game() {
       }
     })
     document.addEventListener("keydown", e => {
-      if (isHoldingTrash) {
+      if (isHoldingTrash && ((player.body.position.x - pacmanBlue.head1.position.x) < 0.1 && (player.body.position.z - pacmanBlue.head1.position.z) < 0.1 || (player.body.position.x - pacmanRed.head1.position.x) < 0.1 && (player.body.position.z - pacmanRed.head1.position.z) < 0.1 || (player.body.position.x - pacmanGreen.head1.position.x) < 0.1 && (player.body.position.z - pacmanGreen.head1.position.z) < 0.1) || (player.body.position.x - pacmanYellow.head1.position.x) < 0.1 && (player.body.position.z - pacmanYellow.head1.position.z) < 0.1) {
         if (e.code === "Enter") {
           player.body.remove(currentTrash.trashItem);
           isHoldingTrash = false;
-          currentTrash = new PlasticTrash();
+          currentTrash = new Trash();
           currentTrash.init(scene.scene, { x: -4, y: -3.5, z: 95 });
         }
       }
@@ -165,7 +162,7 @@ export default function game() {
   function render() {
     scene.renderer.render(scene.scene, scene.camera);
 
-    scene.rotateSun(5000); // speed of rotation
+    scene.rotateSun(15000); // speed of rotation
     player.update();
 
     giantHand.animate(getVolumeByDistance(player.body.position)); // volume of sound

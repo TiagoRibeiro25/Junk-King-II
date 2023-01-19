@@ -4,6 +4,14 @@ import addShadow from "../addShadow.js";
 const footStepSound = new Audio("./assets/sounds/footsteps.mp3");
 footStepSound.volume = 0.2;
 
+const shirtTexture = new THREE.TextureLoader().load(
+  "../../assets/shirt.jpg"
+);
+
+const skinTexture = new THREE.TextureLoader().load(
+  "../../assets/skin.jpg"
+);
+
 const lowerThreshold = -Math.PI / 1.25;
 const upperThreshold = -Math.PI / 4;
 
@@ -38,7 +46,7 @@ let isDownArrowPressed = false;
 
 // cube
 let geometry = new THREE.BoxGeometry(1.5, 0.5, 0.5);
-let material = new THREE.MeshNormalMaterial();
+let material = new THREE.MeshStandardMaterial({ map: skinTexture })
 
 let isFalling = false;
 
@@ -46,12 +54,12 @@ export class Player {
   constructor() {
     this.body = new THREE.Mesh(
       new THREE.BoxGeometry(1, 2, 3),
-      new THREE.MeshBasicMaterial({ color: 0x00ff00 })
+      new THREE.MeshStandardMaterial({ map: shirtTexture })
     );
 
     this.head = new THREE.Mesh(
       new THREE.CylinderGeometry(0.75, 0.75, 1.2, 15),
-      new THREE.MeshBasicMaterial({ color: 0xf00f00 })
+      new THREE.MeshStandardMaterial({ map: skinTexture })
     );
 
     this.pivotCrown = new THREE.Object3D();
@@ -75,7 +83,7 @@ export class Player {
 
     const body1 = new THREE.Mesh(
       new THREE.BoxGeometry(1, 2, 2.2),
-      new THREE.MeshBasicMaterial({ color: 0x00ff00 })
+      new THREE.MeshStandardMaterial({ map: shirtTexture })
     );
     body1.position.set(0, -1, 0);
     this.body.add(body1);
