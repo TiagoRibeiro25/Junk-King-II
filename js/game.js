@@ -21,17 +21,16 @@ export default function game() {
   scene.addSkyBox();
   // scene.enableCameraControls();
 
-  // Load plastic
-  const trash = new PlasticTrash();
-  trash.init(scene.scene, { x: -4, y: -3.5, z: 95 });
-
   // ? Load player
   const player = new Player();
   player.init(scene.scene);
   player.enableKeyboard(document);
-  player.pickupTrash(document, trash, player,scene.scene);
   scene.camera.lookAt(player.body.position);
-  
+
+  // Load plastic
+  const trash = new PlasticTrash();
+  trash.init(scene.scene, { x: -4, y: -3.5, z: 95 });
+
 
   // ? Load Giant Hand
   const giantHand = new GiantHand();
@@ -131,6 +130,37 @@ export default function game() {
   const audio = new Audio("./assets/sounds/gameMusic.mp3");
   audio.volume = 0.03;
 
+  // Pick up trash
+  let currentTrash = trash;
+
+  let isHoldingTrash = false
+  
+    document.addEventListener("keydown", (e) => {
+      if (!isHoldingTrash) {
+        if(e.code === "Space"){
+          if((player.body.position.x - currentTrash.trashItem.position.x) < 1 && (player.body.position.z - currentTrash.trashItem.position.z) < 1){
+            player.body.add(currentTrash.trashItem)
+            currentTrash.trashItem.position.set(2,2,2)
+            isHoldingTrash = true
+          }
+        }
+      
+      }
+    })
+    document.addEventListener("keydown", e => {
+      if (isHoldingTrash) {
+        if (e.code === "Enter") {
+          player.body.remove(currentTrash.trashItem);
+          isHoldingTrash = false;
+          currentTrash = new PlasticTrash();
+          currentTrash.init(scene.scene, { x: -4, y: -3.5, z: 95 });
+        }
+      }
+});
+
+  
+
+  
 
   function render() {
     scene.renderer.render(scene.scene, scene.camera);

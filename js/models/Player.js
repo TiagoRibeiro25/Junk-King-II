@@ -1,7 +1,6 @@
 import * as THREE from "../../libs/three.module.js";
 import addShadow from "../addShadow.js";
 
-
 const footStepSound = new Audio("./assets/sounds/footsteps.mp3");
 footStepSound.volume = 0.2;
 
@@ -390,34 +389,5 @@ export class Player {
 
     footStepSound.play();
     this.run();
-  }
-
-  pickupTrash(document, trash, player, scene) {
-    let isHoldingTrash = false
-
-    let currentTrash = trash;
-    
-      document.addEventListener("keydown", (e) => {
-        if (!isHoldingTrash) {
-          if(e.code === "Space"){
-            if((player.body.position.x - currentTrash.trashItem.position.x) < 1 && (player.body.position.z - currentTrash.trashItem.position.z) < 1){
-              player.body.add(currentTrash.trashItem)
-              currentTrash.trashItem.position.set(2,2,2)
-              isHoldingTrash = true
-            }
-          }
-        
-        }
-      })
-      document.addEventListener("keydown", e => {
-        if (isHoldingTrash) {
-          if (e.code === "Enter") {
-            player.body.remove(currentTrash.trashItem);
-            isHoldingTrash = false;
-            currentTrash = new PlasticTrash();
-            currentTrash.init(scene.scene, { x: -4, y: -3.5, z: 95 });
-          }
-        }
-  });
   }
 }
