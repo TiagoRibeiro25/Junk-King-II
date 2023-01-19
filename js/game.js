@@ -28,7 +28,6 @@ export default function game() {
   const trash = new Trash();
   trash.init(scene.scene, { x: -4, y: -4, z: 95 });
 
-
   // ? Load Giant Hand
   const giantHand = new GiantHand();
   giantHand.init(scene.scene, { x: -40, y: 2, z: 60 }, { x: 0, y: 0, z: 1.55 });
@@ -46,77 +45,49 @@ export default function game() {
   pacmanYellow.init(
     scene.scene,
     // position pacman x y z
-    -10.5, // x
-    -3.8, // y
-    -50, // z
-    // scale pacman x y z
-    0.4, // x
-    0.4, // y
-    0.4, // z
+    { x: -10.5, y: -3.8, z: -50 },
     // colors pacman
-    0xffff00, //color head1
-    0xdbc114, //color arm
-    0xdbc114, //color hand
-    0xffff00 //color head2
+    {
+      headColor: 0xffff00,
+      armColor: 0xdbc114,
+      handColor: 0xdbc114,
+    }
   );
 
   // ? Load green Pacman
   const pacmanGreen = new Pacman();
   pacmanGreen.init(
     scene.scene,
-    // position pacman x y z
-    1.3, // x
-    -3.8, // y
-    -50, // z
-    // scale pacman x y z
-    0.4, // x
-    0.4, // y
-    0.4, // z
-    // colors pacman
-    0x6ff801, //color head1
-    0x1e9b1c, //color arm
-    0x1e9b1c, //color hand
-    0x6ff801 //color head2
+    { x: 1.3, y: -3.8, z: -50 },
+    {
+      headColor: 0x6ff801,
+      armColor: 0x1e9b1c,
+      handColor: 0x1e9b1c,
+    }
   );
 
-  // TODO = ROTATE green pacman
   // ? Load green Pacman
   const pacmanBlue = new Pacman();
   pacmanBlue.init(
     scene.scene,
-    // position pacman x y z
-    -14.0, //x
-    -3.8, // y
-    -20, // z
-    // scale pacman x y z
-    0.4, //x
-    0.4, //y
-    0.4, //z
-    // colors pacman
-    0x054cf7, //color head1
-    0x3ba7ef, //color arm
-    0x3ba7ef, //color hand
-    0x054cf7 //color head2
+    { x: -14.0, y: -3.8, z: -20 },
+    {
+      headColor: 0x054cf7,
+      armColor: 0x3ba7ef,
+      handColor: 0x3ba7ef,
+    }
   );
 
-  // TODO = ROTATE red pacman
   // ? Load red Pacman
   const pacmanRed = new Pacman();
   pacmanRed.init(
     scene.scene,
-    // position pacman x y z
-    4.6, //x
-    -3.8, //y
-    -20, //z
-    // scale pacman x y z
-    0.4, //x
-    0.4, //y
-    0.4, //z
-    // colors pacman
-    0xf11212, //color head1
-    0xbb4242, //color arm
-    0xbb4242, //color hand
-    0xf11212 //color head2
+    { x: 4.6, y: -3.8, z: -20 },
+    {
+      headColor: 0xf11212,
+      armColor: 0xbb4242,
+      handColor: 0xbb4242,
+    }
   );
 
   // ? Load Grass
@@ -130,34 +101,42 @@ export default function game() {
   // Pick up trash
   let currentTrash = trash;
 
-  let isHoldingTrash = false
-  
-    document.addEventListener("keydown", (e) => {
-      if (!isHoldingTrash) {
-        if(e.code === "Space"){
-          if((player.body.position.x - currentTrash.trashItem.position.x) < 1 && (player.body.position.z - currentTrash.trashItem.position.z) < 1){
-            player.body.add(currentTrash.trashItem)
-            currentTrash.trashItem.position.set(2,2,2)
-            isHoldingTrash = true
-          }
-        }
-      
-      }
-    })
-    document.addEventListener("keydown", e => {
-      if (isHoldingTrash && ((player.body.position.x - pacmanBlue.head1.position.x) < 0.1 && (player.body.position.z - pacmanBlue.head1.position.z) < 0.1 || (player.body.position.x - pacmanRed.head1.position.x) < 0.1 && (player.body.position.z - pacmanRed.head1.position.z) < 0.1 || (player.body.position.x - pacmanGreen.head1.position.x) < 0.1 && (player.body.position.z - pacmanGreen.head1.position.z) < 0.1) || (player.body.position.x - pacmanYellow.head1.position.x) < 0.1 && (player.body.position.z - pacmanYellow.head1.position.z) < 0.1) {
-        if (e.code === "Enter") {
-          player.body.remove(currentTrash.trashItem);
-          isHoldingTrash = false;
-          currentTrash = new Trash();
-          currentTrash.init(scene.scene, { x: -4, y: -3.5, z: 95 });
+  let isHoldingTrash = false;
+
+  document.addEventListener("keydown", (e) => {
+    if (!isHoldingTrash) {
+      if (e.code === "Space") {
+        if (
+          player.body.position.x - currentTrash.trashItem.position.x < 1 &&
+          player.body.position.z - currentTrash.trashItem.position.z < 1
+        ) {
+          player.body.add(currentTrash.trashItem);
+          currentTrash.trashItem.position.set(2, 2, 2);
+          isHoldingTrash = true;
         }
       }
-});
-
-  
-
-  
+    }
+  });
+  document.addEventListener("keydown", (e) => {
+    if (
+      (isHoldingTrash &&
+        ((player.body.position.x - pacmanBlue.head1.position.x < 0.1 &&
+          player.body.position.z - pacmanBlue.head1.position.z < 0.1) ||
+          (player.body.position.x - pacmanRed.head1.position.x < 0.1 &&
+            player.body.position.z - pacmanRed.head1.position.z < 0.1) ||
+          (player.body.position.x - pacmanGreen.head1.position.x < 0.1 &&
+            player.body.position.z - pacmanGreen.head1.position.z < 0.1))) ||
+      (player.body.position.x - pacmanYellow.head1.position.x < 0.1 &&
+        player.body.position.z - pacmanYellow.head1.position.z < 0.1)
+    ) {
+      if (e.code === "Enter") {
+        player.body.remove(currentTrash.trashItem);
+        isHoldingTrash = false;
+        currentTrash = new Trash();
+        currentTrash.init(scene.scene, { x: -4, y: -3.5, z: 95 });
+      }
+    }
+  });
 
   function render() {
     scene.renderer.render(scene.scene, scene.camera);

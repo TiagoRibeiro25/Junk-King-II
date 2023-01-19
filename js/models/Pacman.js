@@ -147,24 +147,14 @@ export class Pacman {
     this.connectRightThumbFingerPivot = new THREE.Object3D();
   }
 
-  init(scene,
-       positionX,
-       positionY,
-       positionZ,
-       scaleX,
-       scaleY,
-       scaleZ,
-       headColor,
-       armColor,
-       handColor,
-      //  rotationY
-    ) {
-
-      // PACMAN COLOR
-    this.headMaterial = new THREE.MeshBasicMaterial({ color: headColor });
-    this.ArmMaterial = new THREE.MeshBasicMaterial({color: armColor});
-    this.HandMaterial = new THREE.MeshBasicMaterial({color: handColor});
-    this.mouthMaterial = new THREE.MeshBasicMaterial({ color: headColor });
+  init(scene, position, color) {
+    // PACMAN COLOR
+    this.headMaterial = new THREE.MeshBasicMaterial({ color: color.headColor });
+    this.ArmMaterial = new THREE.MeshBasicMaterial({ color: color.armColor });
+    this.HandMaterial = new THREE.MeshBasicMaterial({ color: color.handColor });
+    this.mouthMaterial = new THREE.MeshBasicMaterial({
+      color: color.headColor,
+    });
 
     // --------------- PACMAN Meshes-------------------------
     // mesh first half head
@@ -438,8 +428,8 @@ export class Pacman {
     this.connectThirdRightFingerPivot.rotation.x = 30;
 
     // ---------------------PACMAN MODEL -------------------------------------------
-    this.yellowPacman = new THREE.Group();
-    this.yellowPacman.add(
+    this.Pacman = new THREE.Group();
+    this.Pacman.add(
       this.head1,
       this.head2,
       this.leftArm,
@@ -450,18 +440,11 @@ export class Pacman {
       this.mouth
     );
 
-    scene.add(this.yellowPacman);
-    this.yellowPacman.position.set(positionX, positionY, positionZ);
-    this.yellowPacman.scale.set(scaleX, scaleY, scaleZ);
-    // this.yellowPacman.rotation.y = rotationY
+    scene.add(this.Pacman);
+    this.Pacman.position.set(position.x, position.y, position.z);
+    this.Pacman.scale.set(0.4, 0.4, 0.4);
 
-    addShadow(
-      this.head1,
-      this.head2,
-      this.leftArm,
-      this.rightArm,
-      this.mouth
-      )
+    addShadow(this.head1, this.head2, this.leftArm, this.rightArm, this.mouth);
   }
 
   // ----------------------ANIMATION SECTION-------------------------------------
