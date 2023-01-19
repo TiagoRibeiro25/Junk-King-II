@@ -56,11 +56,10 @@ export default function game() {
     { x: 0, y: Math.PI, z: 1.55 }
   );
   
-
   // ? Load yellow Pacman
   const pacmanYellow = new Pacman();
   pacmanYellow.init(scene.scene,
-                    -15.5, -3, -50,
+                    -9.5, -3.8, -50,
                     0.4, 0.4, 0.4,
                     0xffff00, 0xdbc114, 0xdbc114, 0xffff00
             );
@@ -68,25 +67,32 @@ export default function game() {
   // ? Load green Pacman
   const pacmanGreen = new Pacman();
   pacmanGreen.init(scene.scene,
-                    -6.60, -3, -50,
+                    -1.30, -3.8, -50,
                     0.4, 0.4, 0.4,
                    0x6FF801, 0x1E9B1C, 0x1E9B1C, 0x6FF801
             );
 
 
+            // TODO = ROTATE green pacman
   // ? Load green Pacman
   const pacmanBlue = new Pacman();
   pacmanBlue.init(scene.scene,
-                    -11.60, -3, -20,
+                    // position pacman x y z
+                    -14.00, -3.8, -20,
+                    // scale pacman x y z
                     0.4, 0.4, 0.4,
-                   0x054CF7, 0x3BA7EF, 0x3BA7EF, 0x054CF7
-            );
+                   0x054CF7, 0x3BA7EF, 0x3BA7EF, 0x054CF7,
+                    // rotate y axis pacman
+                    // 180
+
+                   );
 
 
+            // TODO = ROTATE red pacman
   // ? Load red Pacman
   const pacmanRed = new Pacman();
   pacmanRed.init(scene.scene,
-                    6.60, -3, -20,
+                    6.60, -3.8, -20,
                     0.4, 0.4, 0.4,
                    0xF11212, 0xBB4242, 0xBB4242, 0xF11212
             );

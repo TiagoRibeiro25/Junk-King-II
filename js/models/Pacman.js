@@ -156,7 +156,8 @@ export class Pacman {
        scaleZ,
        headColor,
        armColor,
-       handColor
+       handColor,
+      //  rotationY
     ) {
 
       // PACMAN COLOR
@@ -452,6 +453,7 @@ export class Pacman {
     scene.add(this.yellowPacman);
     this.yellowPacman.position.set(positionX, positionY, positionZ);
     this.yellowPacman.scale.set(scaleX, scaleY, scaleZ);
+    // this.yellowPacman.rotation.y = rotationY
 
     addShadow(
       this.head1,
