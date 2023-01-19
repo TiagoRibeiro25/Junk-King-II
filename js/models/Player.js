@@ -88,7 +88,8 @@ export class Player {
     body1.position.set(0, -1, 0);
     this.body.add(body1);
 
-    addShadow(this.body, body1);
+    this.body.castShadow = true;
+    body1.castShadow = true;
   }
 
   createHead() {
@@ -116,7 +117,7 @@ export class Player {
       this.head.add(eye);
     }
 
-    addShadow(this.head);
+    this.head.castShadow = true;
   }
 
   createCrown() {
@@ -196,7 +197,11 @@ export class Player {
     cube4.position.set(0.75, 0, 0);
     this.pivotElbowLeft.add(cube4);
 
-    addShadow(cube, cube2, cube3, cube4);
+    cube.castShadow = true;
+    cube2.castShadow = true;
+    cube3.castShadow = true;
+    cube4.castShadow = true;
+    
   }
 
   createLegs() {
@@ -234,7 +239,10 @@ export class Player {
     cube8.position.set(0.75, 0, 0);
     this.pivotKneeLeft.add(cube8);
 
-    addShadow(cube5, cube6, cube7, cube8);
+    cube5.castShadow = true;
+    cube6.castShadow = true;
+    cube7.castShadow = true;
+    cube8.castShadow = true;
   }
 
   enableKeyboard(document) {
