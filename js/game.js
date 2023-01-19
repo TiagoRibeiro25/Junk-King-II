@@ -29,19 +29,19 @@ export default function game() {
 
   // Load plastic
   const plastic = new PlasticTrash();
-  plastic.init(scene.scene, { x: -14, y: 0, z: 95 });
+  plastic.init(scene.scene, { x: -14, y: -3.5, z: 95 });
 
   // Load battery
   const battery = new BatteryTrash();
-  battery.init(scene.scene, { x: -8, y: 0, z: 95 });
+  battery.init(scene.scene, { x: -8, y: -3.5, z: 95 });
 
   // Load Paper
   const paper = new PaperTrash();
-  paper.init(scene.scene, { x: -2, y: 0, z: 95 });
+  paper.init(scene.scene, { x: -2, y: -3.5, z: 95 });
 
   // Load glass
   const glass = new GlassTrash();
-  glass.init(scene.scene, { x: 4, y: 0, z: 95 });
+  glass.init(scene.scene, { x: 4, y: -3.5, z: 95 });
 
   // ? Load Giant Hand
   const giantHand = new GiantHand();
@@ -140,6 +140,22 @@ export default function game() {
   // ? Load Music
   const audio = new Audio("./assets/sounds/gameMusic.mp3");
   audio.volume = 0.03;
+
+  // Pick up trash
+  const trash = [plastic, paper, battery, glass]
+
+  
+  for (let i = 0; i < trash.length; i++) {
+    document.addEventListener("keydown", (e) => {
+      if(e.code === "Space"){
+        if((player.body.position.x - trash[i].trashItem.position.x) < 0.5 && (player.body.position.z - trash[i].trashItem.position.z) < 0.5){
+          player.body.add(trash[i].trashItem)
+        }
+      }
+    })
+  }
+
+  
 
   function render() {
     scene.renderer.render(scene.scene, scene.camera);
