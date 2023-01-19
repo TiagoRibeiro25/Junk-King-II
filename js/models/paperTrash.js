@@ -4,13 +4,13 @@ export class PaperTrash {
     constructor() {
       this.geometry = new THREE.DodecahedronGeometry(1.5);
       this.material = new THREE.MeshBasicMaterial({ color: 0x0000FF });
-      this.paper = new THREE.Mesh(this.geometry, this.material);
+      this.trashItem = new THREE.Mesh(this.geometry, this.material);
     }
   
     init(scene, position) {
-      this.paper.position.x = position.x;
-      this.paper.position.y = position.y;
-      this.paper.position.z = position.z;
-      scene.add(this.paper);
+      this.trashItem.position.x = position.x;
+      this.trashItem.position.y = position.y;
+      this.trashItem.position.z = position.z;
+      scene.add(this.trashItem);
     }
 }
