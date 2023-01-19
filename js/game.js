@@ -28,20 +28,9 @@ export default function game() {
   scene.camera.lookAt(player.body.position);
 
   // Load plastic
-  const plastic = new PlasticTrash();
-  plastic.init(scene.scene, { x: -14, y: -3.5, z: 95 });
+  const trash = new PlasticTrash();
+  trash.init(scene.scene, { x: -4, y: -3.5, z: 95 });
 
-  // Load battery
-  const battery = new BatteryTrash();
-  battery.init(scene.scene, { x: -8, y: -3.5, z: 95 });
-
-  // Load Paper
-  const paper = new PaperTrash();
-  paper.init(scene.scene, { x: -2, y: -3.5, z: 95 });
-
-  // Load glass
-  const glass = new GlassTrash();
-  glass.init(scene.scene, { x: 4, y: -3.5, z: 95 });
 
   // ? Load Giant Hand
   const giantHand = new GiantHand();
@@ -142,18 +131,36 @@ export default function game() {
   audio.volume = 0.03;
 
   // Pick up trash
-  const trash = [plastic, paper, battery, glass]
-
-  
-  for (let i = 0; i < trash.length; i++) {
+ 
+  let isHoldingTrash = false
     document.addEventListener("keydown", (e) => {
-      if(e.code === "Space"){
-        if((player.body.position.x - trash[i].trashItem.position.x) < 0.5 && (player.body.position.z - trash[i].trashItem.position.z) < 0.5){
-          player.body.add(trash[i].trashItem)
+      let rand = Math.random() * 6;
+      rand = Math.floor(rand);
+
+      if (!isHoldingTrash) {
+        if(e.code === "Space"){
+          if((player.body.position.x - trash.trashItem.position.x) < 1 && (player.body.position.z - trash.trashItem.position.z) < 1){
+            player.body.add(trash.trashItem)
+            trash.trashItem.position.set(2,2,2)
+            isHoldingTrash = true
+            console.log(isHoldingTrash);
+          }
         }
+        if (isHoldingTrash) {
+          if(e.code === "Space"){
+            player.body.remove(trash.trashItem)
+            const trash = new PlasticTrash();
+            trash.init(scene.scene, { x: rand, y: -3.5, z: 95 });
+            isHoldingTrash = false
+            console.log(isHoldingTrash);
+          }  
+        }
+        
       }
+      console.log(isHoldingTrash);
+      
     })
-  }
+  
 
   
 
